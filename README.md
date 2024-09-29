@@ -4,7 +4,6 @@ The application has these following functions and there can still be more:
   2. Course Management
   3. Financial Management
   4. User Access Control
-  5. Grade Management
 
 
 
