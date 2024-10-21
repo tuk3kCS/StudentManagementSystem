@@ -1,5 +1,5 @@
 
-package Student_Management_System;
+package stu_mng_sys;
 import java.util.*; 
 public class Lecturer extends User{
     Scanner sc = new Scanner(System.in); 
@@ -16,18 +16,20 @@ public class Lecturer extends User{
         this.lecID = lecID; 
     }
     
-    public void setName(){
-        String name = sc.nextLine(); 
-        this.name = name; 
+    public void setName(String name){
+        this.name = name;
     }
     
     public String getName(){
         return this.name;
     }
     
-    public void setDob(){
-        String Dob = sc.nextLine(); 
+    public void setDob(String Dob){
         this.DoB = Dob; 
+    }
+    
+    public String getDob(){
+        return this.DoB; 
     }
     
     public void setPhoneno(){
@@ -57,9 +59,8 @@ public class Lecturer extends User{
         return this.lecID; 
     }
     
-    public void setGrade(){
-        Float grade = sc.nextFloat(); 
-        
-    }
+    public String toString(){
+        return this.lecID + " " + this.name + " " + this.DoB + " " + this.phoneNo + " " + this.Email; 
+    } 
     
 }
