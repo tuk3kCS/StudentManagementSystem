@@ -1,36 +1,37 @@
 
-package Student_Management_System;
+package stu_mng_sys;
 import java.util.*; 
 public class Student extends User{
     Scanner sc = new Scanner(System.in); 
-    private String name, DoB, phoneNo, Email, studentID,classRoom; 
-    private HashMap<Courses,Boolean> enrolledCourses;
+    private String name, DoB, phoneNo, Email, studentID,classRoom,tuitionFeeStatus;  
+    private ArrayList<Pair<Courses,String>> enrolledCourses; 
+    private long tuitionFee; 
     
     Student(){
-        enrolledCourses = new HashMap<>(); 
+        enrolledCourses = new ArrayList<Pair<Courses,String>>(); 
     }
     
-    Student(String name, String DoB, String phoneNo, String Email,String studentID, String classRoom, HashMap<Courses,Boolean> enrollCourses){
+    Student(String name, String Dob, String phoneNo, String email, String stuID, String classroom, ArrayList<Pair<Courses,String>>enrolledCourses, long tuitionFee, String tuitionFeeStatus){
         this.name = name;
-        this.DoB = DoB; 
-        this.phoneNo = phoneNo; 
-        this.Email = Email; 
-        this.studentID = studentID; 
-        this.classRoom = classRoom; 
-        this.enrolledCourses = enrollCourses; 
+        this.DoB = Dob;
+        this.phoneNo = phoneNo;
+        this.Email = email; 
+        this.studentID = stuID; 
+        this.classRoom = classroom; 
+        this.enrolledCourses = enrolledCourses;
+        this.tuitionFee = tuitionFee;
+        this.tuitionFeeStatus = tuitionFeeStatus; 
     }
     
-    public void setName(){
-        String name = sc.nextLine();
-        this.name = name;
+    public void setName(String name){
+        this.name = name; 
     }
     
     public String getName(){
         return this.name;
     }
     
-    public void setDob(){
-        String Dob = sc.nextLine(); 
+    public void setDob(String Dob){ 
         this.DoB = Dob; 
     }
     
@@ -38,8 +39,7 @@ public class Student extends User{
         return this.DoB; 
     }
     
-    public void setPhoneNo(){
-        String phoneNo = sc.nextLine();
+    public void setPhoneNo(String phoneNo){
         this.phoneNo = phoneNo; 
     }
     
@@ -47,8 +47,7 @@ public class Student extends User{
         return this.phoneNo; 
     }
     
-    public void setEmail(){
-        String email = sc.nextLine();
+    public void setEmail(String email){
         this.Email = email; 
     }
     
@@ -56,8 +55,7 @@ public class Student extends User{
         return this.Email; 
     }
     
-    public void setStudentID(){
-        String ID = sc.nextLine(); 
+    public void setStudentID(String ID){
         this.studentID = ID; 
     }
     
@@ -65,8 +63,7 @@ public class Student extends User{
         return this.studentID; 
     }
     
-    public void setClassroom(){
-        String classroom = sc.nextLine();
+    public void setClassroom(String classroom){
         this.classRoom = classroom; 
     }
     
@@ -74,28 +71,33 @@ public class Student extends User{
         return this.classRoom; 
     }
     
-    public void setEnrollCourses(HashMap<Courses,Boolean>enrolledCourse){
-        this.enrolledCourses = enrolledCourse; 
+    public void setEnrollCourses(ArrayList<Pair<Courses,String>>enrolledCourses){
+        this.enrolledCourses = enrolledCourses; 
     }
     
     public void getEnrollCourses(){
         System.out.println("Enrolled Courses:");
-        for(Courses course:enrolledCourses.keySet()){
-            System.out.println(course + ": " + ((enrolledCourses.get(course)) ? "Enrolled" : "Not Enrolled"));
+        for(Pair<Courses,String>pair:this.enrolledCourses){
+            System.out.println(pair.getKey() + " " + pair.getValue());
         }
     }
     
     public String getSchedule(){
-        String schedule = sc.nextLine();
+        String schedule = sc.nextLine(); 
         return schedule; 
     }
     
     public void getGrade(){
-        
+        Grade x = new Grade(); 
+        System.out.println(x);
     }
     
-    public void getTuitionFee(){
-        
+    public long getTuitionFee(){
+        return this.tuitionFee; 
+    }
+    
+    public String getTuitionFeeStatus(){
+        return this.tuitionFeeStatus; 
     }
     
     public String toString(){
