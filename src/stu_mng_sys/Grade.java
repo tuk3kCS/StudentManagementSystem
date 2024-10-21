@@ -2,27 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Student_Management_System;
+package stu_mng_sys;
 import java.util.*; 
 public class Grade {
-    private ArrayList<Float> gpa; 
+    Scanner sc = new Scanner(System.in);
+    private float gpa;
+    private Student student;
+    private Courses course; 
     Grade(){
-        gpa = new ArrayList<>(); 
+        this.gpa = sc.nextFloat(); 
     }
     
-    public void setGpa(ArrayList<Float>gpa){
+    public void setGpa(float gpa){
         this.gpa = gpa;
     }
     
-    public ArrayList getGpa(){
+    public float getGpa(){
         return this.gpa; 
     }
     
     public String toString(){
-        String res = " ";
-        for(int i = 0;i < this.gpa.size();i++){
-            res = res + this.gpa.get(i) + " "; 
-        }
-        return res;
+        return this.gpa + " " + this.student + " " + this.course; 
     }
 }
