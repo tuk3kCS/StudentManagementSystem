@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Student_Management_System;
+package stu_mng_sys;
 import java.util.*; 
 public class Courses {
     private String CourseID, name,lecturer;
@@ -67,8 +67,8 @@ public class Courses {
     }
     
     public void getStudent(){
-        for(int i = 0;i < this.student.size();i++){
-            System.out.println(this.student.get(i));
+        for(int i = 0;i < student.size();i++){
+            System.out.println(student.get(i));
         }
     }
     
