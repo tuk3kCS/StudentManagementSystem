@@ -11,14 +11,13 @@ public class Student extends User{
         enrolledCourses = new ArrayList<Pair<Courses,String>>(); 
     }
     
-    Student(String name, String Dob, String phoneNo, String email, String stuID, String classroom, ArrayList<Pair<Courses,String>>enrolledCourses, long tuitionFee, String tuitionFeeStatus){
+    Student(String name, String Dob, String phoneNo, String email, String stuID, String classroom, long tuitionFee, String tuitionFeeStatus){
         this.name = name;
         this.DoB = Dob;
         this.phoneNo = phoneNo;
         this.Email = email; 
         this.studentID = stuID; 
         this.classRoom = classroom; 
-        this.enrolledCourses = enrolledCourses;
         this.tuitionFee = tuitionFee;
         this.tuitionFeeStatus = tuitionFeeStatus; 
     }
