@@ -1,9 +1,9 @@
-# V2 #
+# V2 (22/10/2024) #
 
 ## Documentation ##
 This project was built based on [this documentation](https://docs.google.com/document/d/1ykAxeGi7Jb3xjWLx0umRzozdHD464DO-ftUQm6NyF50/).
 
-# V1 #
+# V1 (25/09/2024) #
 
 ## Description ##
 A software application designed to help educational institutions manage student data and streamline administrative processes.
