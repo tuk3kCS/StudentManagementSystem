@@ -1,106 +1,101 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package stu_mng_sys;
-import java.util.*; 
-public class Student extends User{
-    Scanner sc = new Scanner(System.in); 
-    private String name, DoB, phoneNo, Email, studentID,classRoom,tuitionFeeStatus;  
-    private ArrayList<Pair<Courses,String>> enrolledCourses; 
-    private long tuitionFee; 
-    
+import java.util.*;
+public class Student {
+    private String studentID, fullName, DoB, Gender, Address, Email, phoneNo, classID,Major; 
     Student(){
-        enrolledCourses = new ArrayList<Pair<Courses,String>>(); 
+        
     }
     
-    Student(String name, String Dob, String phoneNo, String email, String stuID, String classroom, long tuitionFee, String tuitionFeeStatus){
-        this.name = name;
-        this.DoB = Dob;
+    Student(String studentID, String fullName, String DoB, String Gender, String Address, String Email, String phoneNo, String classID,String Major){
+        this.studentID = studentID; 
+        this.fullName = fullName;
+        this.DoB = DoB;
+        this.Gender = Gender;
+        this.Address = Address;
+        this.Email = Email;
         this.phoneNo = phoneNo;
-        this.Email = email; 
-        this.studentID = stuID; 
-        this.classRoom = classroom; 
-        this.tuitionFee = tuitionFee;
-        this.tuitionFeeStatus = tuitionFeeStatus; 
-    }
-    
-    public void setName(String name){
-        this.name = name; 
-    }
-    
-    public String getName(){
-        return this.name;
-    }
-    
-    public void setDob(String Dob){ 
-        this.DoB = Dob; 
-    }
-    
-    public String getDob(){
-        return this.DoB; 
-    }
-    
-    public void setPhoneNo(String phoneNo){
-        this.phoneNo = phoneNo; 
-    }
-    
-    public String getPhoneNo(){
-        return this.phoneNo; 
-    }
-    
-    public void setEmail(String email){
-        this.Email = email; 
-    }
-    
-    public String getEmail(){
-        return this.Email; 
-    }
-    
-    public void setStudentID(String ID){
-        this.studentID = ID; 
+        this.classID = classID; 
+        this.Major = Major; 
     }
     
     public String getStudentID(){
         return this.studentID; 
     }
     
-    public void setClassroom(String classroom){
-        this.classRoom = classroom; 
+    public void setfullName(String s){
+        this.fullName = s; 
     }
     
-    public String getClassroom(){
-        return this.classRoom; 
+    public String getfullName(){
+        return this.fullName; 
     }
     
-    public void setEnrollCourses(ArrayList<Pair<Courses,String>>enrolledCourses){
-        this.enrolledCourses = enrolledCourses; 
+    public void setDoB(String s){
+        this.DoB = s; 
     }
     
-    public void getEnrollCourses(){
-        System.out.println("Enrolled Courses:");
-        for(Pair<Courses,String>pair:this.enrolledCourses){
-            System.out.println(pair.getKey() + " " + pair.getValue());
-        }
+    public String getDoB(){
+        return this.DoB; 
     }
     
-    public String getSchedule(){
-        String schedule = sc.nextLine(); 
-        return schedule; 
+    public void setGender(String s){
+        this.Gender = s; 
     }
     
-    public void getGrade(){
-        Grade x = new Grade(); 
-        System.out.println(x);
+    public String getGender(){
+        return this.Gender; 
     }
     
-    public long getTuitionFee(){
-        return this.tuitionFee; 
+    public void setAddress(String s){
+        this.Address = s; 
     }
     
-    public String getTuitionFeeStatus(){
-        return this.tuitionFeeStatus; 
+    public String getAddress(){
+        return this.Address; 
+    }
+    
+    public String getEmail(){
+        return this.Email; 
+    }
+    
+    public void setPhoneNo(String s){
+        this.phoneNo = s; 
+    }
+    
+    public String getPhoneNo(){
+        return this.phoneNo; 
+    }
+    
+    public void setMajor(String s){
+        this.Major = s; 
+    }
+    
+    public String getMajor(){
+        return this.Major; 
+    }
+    
+    public void setClassID(String s){
+        this.classID = s; 
+    }
+    
+    public String getClassID(){
+        return this.classID;
+    }
+    
+    public void addNewStudent(){
+        
+    }
+    
+    public void viewModifyInfor(){
+        
     }
     
     public String toString(){
-        return this.studentID + " " + this.name + " " + this.Email + " " + this.DoB + " " + this.classRoom; 
+        return this.studentID + " " + this.fullName + " " + this.DoB + " " + this.phoneNo + " " + this.Email + " " + this.Gender + " " + this.Address + " " + this.Major + " " + this.classID; 
     }
     
 }
