@@ -11,19 +11,20 @@ public class Student {
         
     }
     
-    Student(String studentID, String fullName, String DoB, String Gender, String Address, String Email, String phoneNo, String classID,String Major){
-        this.studentID = studentID; 
+    Student(String fullName, String DoB, String Gender, String Address,String phoneNo, String classID,String Major){
+        this.studentID = convertStudentID(); 
         this.fullName = fullName;
         this.DoB = DoB;
         this.Gender = Gender;
         this.Address = Address;
-        this.Email = Email;
+        this.Email = convertEmail(); 
         this.phoneNo = phoneNo;
         this.classID = classID; 
         this.Major = Major; 
     }
     
-    public void setStudentID(){ 
+    public String convertStudentID(){ // convert to get studentID; 
+        String res = ""; 
         int DoB = Integer.valueOf(this.DoB.substring(6,10)); 
         int tmp = 0;
         while(DoB != 0){
@@ -32,8 +33,14 @@ public class Student {
         }
         tmp += 18;
         String x = String.valueOf(tmp); 
-        this.studentID = "B"+x.substring(x.length()-2,x.length()) + this.Major.substring(0,2) + String.format("%04d",index); 
-        index+=1; 
+        String word[] = this.Major.trim().split("\\s++");
+        String majorTitle = ""; 
+        for(int i = 0;i < word.length;i++){
+            majorTitle += word[i].substring(0,1); 
+        }
+        res = "B"+x.substring(x.length()-2,x.length()) + "DC" + majorTitle + String.format("%04d",index); 
+        index+=1;
+        return res; 
     }
     
     public String getStudentID(){
@@ -72,14 +79,19 @@ public class Student {
         return this.Address; 
     }
     
-    public String getEmail(){
-        String res[] = this.fullName.trim().split("\\s++");
-        this.Email = res[res.length-1]; 
-        for(int i = 0;i < res.length-1;i++){
-            this.Email += res[i].substring(0,1); 
+    public String convertEmail(){ // convert to get Email for student
+        String res = ""; 
+        String word[] = this.fullName.trim().split("\\s++");
+        res = word[word.length-1]; 
+        for(int i = 0;i < word.length-1;i++){
+            res += word[i].substring(0,1); 
         }
-        this.Email = this.Email + "." + this.studentID + "@stu.ptit.edu.vn";
-        return this.Email.toLowerCase();
+        res = res + "." + this.studentID + "@stu.ptit.edu.vn";
+        return res.toLowerCase();
+    }
+    
+    public String getEmail(){
+        return this.Email.toLowerCase(); 
     }
     
     public void setPhoneNo(String s){
