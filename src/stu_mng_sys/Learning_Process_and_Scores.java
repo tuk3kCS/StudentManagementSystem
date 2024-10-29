@@ -9,12 +9,12 @@ public class Learning_Process_and_Scores {
         
     }
     
-    public Learning_Process_and_Scores(float attendanceScore, float processScore, float midtermScore, float finalScore,double GPA){
+    public Learning_Process_and_Scores(float attendanceScore, float processScore, float midtermScore, float finalScore){
         this.attendanceScore = attendanceScore; 
         this.processScore = processScore; 
         this.midtermScore = midtermScore; 
         this.finalScore = finalScore; 
-        this.GPA = GPA; 
+        this.GPA = 0.1*this.attendanceScore + 0.1*this.processScore + 0.2*this.midtermScore + 0.6 * this.finalScore;
     }
     
     public void setAttendanceScore(float d){
@@ -50,7 +50,6 @@ public class Learning_Process_and_Scores {
     }
     
     public double getGPA(){
-        this.GPA = 0.1*this.attendanceScore + 0.1*this.processScore + 0.2*this.midtermScore + 0.6 * this.finalScore;
         return this.GPA; 
     }
     
