@@ -2,13 +2,14 @@
 package stu_mng_sys;
 import java.util.*;
 public class Learning_Process_and_Scores {
-    private float attendanceScore, processScore, midtermScore, finalScore, GPA; 
+    private float attendanceScore, processScore, midtermScore, finalScore;
+    private double GPA; 
 
     public Learning_Process_and_Scores() {
         
     }
     
-    public Learning_Process_and_Scores(float attendanceScore, float processScore, float midtermScore, float finalScore,float GPA){
+    public Learning_Process_and_Scores(float attendanceScore, float processScore, float midtermScore, float finalScore,double GPA){
         this.attendanceScore = attendanceScore; 
         this.processScore = processScore; 
         this.midtermScore = midtermScore; 
@@ -17,7 +18,7 @@ public class Learning_Process_and_Scores {
     }
     
     public void setAttendanceScore(float d){
-        this.attendanceScore = d; 
+        if(d >= 0 && d <= 10) this.attendanceScore = d; 
     }
     
     public float getAttendanceScore(){
@@ -25,7 +26,7 @@ public class Learning_Process_and_Scores {
     }
     
     public void setProcessScore(float d){
-        this.processScore = d; 
+        if(d >= 0 && d <= 10) this.processScore = d; 
     }
     
     public float getProcessScore(){
@@ -33,7 +34,7 @@ public class Learning_Process_and_Scores {
     }
     
     public void setMidtermScore(float d){
-        this.midtermScore = d; 
+        if(d >= 0 && d <= 10) this.midtermScore = d; 
     }
     
     public float getMidtermScore(){
@@ -41,15 +42,16 @@ public class Learning_Process_and_Scores {
     }
     
     public void setFinalScore(float d){
-        this.finalScore = d; 
+        if(d >= 0 && d <= 10) this.finalScore = d; 
     }
     
     public float getFinalScore(){
         return this.finalScore; 
     }
     
-    public float getGPA(){
-        return this.GPA;
+    public double getGPA(){
+        this.GPA = 0.1*this.attendanceScore + 0.1*this.processScore + 0.2*this.midtermScore + 0.6 * this.finalScore;
+        return this.GPA; 
     }
     
     public void viewLearningProcess(){
