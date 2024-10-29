@@ -56,6 +56,8 @@ public class Student {
     }
     
     public void setDoB(String s){
+        if(s.charAt(1) == '/') s = "0" + s; 
+        if(s.charAt(4) == '/') s = s.substring(0,3) + "0" + s.substring(3); 
         this.DoB = s; 
     }
     
