@@ -6,6 +6,7 @@ package stu_mng_sys;
 import java.util.*;
 public class Student {
     private String studentID, fullName, DoB, Gender, Address, Email, phoneNo, classID,Major; 
+    public int index = 1; 
     Student(){
         
     }
@@ -22,8 +23,21 @@ public class Student {
         this.Major = Major; 
     }
     
+    public void setStudentID(){ 
+        int DoB = Integer.valueOf(this.DoB.substring(6,10)); 
+        int tmp = 0;
+        while(DoB != 0){
+            tmp += DoB % 10; 
+            DoB/=10; 
+        }
+        tmp += 18;
+        String x = String.valueOf(tmp); 
+        this.studentID = "B"+x.substring(x.length()-2,x.length()) + this.Major.substring(0,2) + String.format("%04d",index); 
+        index+=1; 
+    }
+    
     public String getStudentID(){
-        return this.studentID; 
+        return this.studentID.toUpperCase(); 
     }
     
     public void setfullName(String s){
@@ -59,7 +73,13 @@ public class Student {
     }
     
     public String getEmail(){
-        return this.Email; 
+        String res[] = this.fullName.trim().split("\\s++");
+        this.Email = res[res.length-1]; 
+        for(int i = 0;i < res.length-1;i++){
+            this.Email += res[i].substring(0,1); 
+        }
+        this.Email = this.Email + "." + this.studentID + "@stu.ptit.edu.vn";
+        return this.Email.toLowerCase();
     }
     
     public void setPhoneNo(String s){
