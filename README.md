@@ -20,8 +20,7 @@ This project was built based on [this documentation](https://docs.google.com/doc
 A software application designed to help educational institutions manage student data and streamline administrative processes.
 
 ## Functions ##
-  1. Student Information Management
-  2. Course Management
-  3. Financial Management
-  4. User Access Control
-  5. Grade Management
+  1. Student Management
+  2. Class Management
+  3. Subject Management
+  4. Learning Process and Score Management
