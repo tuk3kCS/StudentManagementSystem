@@ -1,24 +1,29 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package stu_mng_sys;
 import java.util.*;
 public class Student {
     private String studentID, fullName, DoB, Gender, Address, Email, phoneNo, classID,Major; 
-    public int index = 1; 
+    public int index = 0; 
+    
     Student(String fullName, String DoB, String Gender, String Address,String phoneNo, String classID,String Major){
-        this.studentID = getStudentID();
-        this.fullName = convertFullName(fullName); 
-        this.DoB = setDoB(DoB);
+        this.fullName = fullName; 
+        this.DoB = DoB; 
         this.Gender = Gender;
         this.Address = Address;
-        this.Email = convertEmail(); 
+        this.Email = "";  
         this.phoneNo = phoneNo;
         this.classID = classID; 
         this.Major = Major; 
+        this.studentID = "";
+        index++; 
     }
     
     public String getStudentID(){ // convert to get studentID; 
         String res = ""; 
-        int DoB = Integer.valueOf(this.DoB.substring(6,10)); 
+        int DoB = Integer.valueOf(this.DoB.substring(6)); 
         int tmp = 0;
         while(DoB != 0){
             tmp += DoB % 10; 
@@ -31,9 +36,8 @@ public class Student {
         for(int i = 0;i < word.length;i++){
             majorTitle += word[i].substring(0,1); 
         }
-        res = "B"+x.substring(x.length()-2,x.length()) + "DC" + majorTitle + String.format("%04d",index); 
-        index+=1;
-        return res; 
+        res = "B"+x.substring(x.length()-2,x.length()) + "DC" + majorTitle + String.format("%03d",index); 
+        return res.toUpperCase(); 
     }
     
     public String convertFullName(String fullName){
@@ -58,7 +62,7 @@ public class Student {
         for(int i = 0;i < word.length-1;i++){
             res += word[i].substring(0,1); 
         }
-        res = res + "." + this.studentID + "@stu.ptit.edu.vn";
+        res = res + "." + getStudentID() + "@stu.ptit.edu.vn";
         return res.toLowerCase();
     }
     
@@ -71,6 +75,10 @@ public class Student {
     }
     
     public String toString(){
+        this.DoB = setDoB(DoB);
+        this.studentID = getStudentID();
+        this.Email = convertEmail();
+        this.fullName = convertFullName(fullName); 
         return this.studentID + " " + this.fullName + " " + this.DoB + " " + this.phoneNo + " " + this.Email + " " + this.Gender + " " + this.Address + " " + this.Major + " " + this.classID; 
     }
     
