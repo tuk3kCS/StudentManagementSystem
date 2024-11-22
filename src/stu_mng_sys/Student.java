@@ -1,20 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package stu_mng_sys;
 import java.util.*;
 public class Student {
     private String studentID, fullName, DoB, Gender, Address, Email, phoneNo, classID,Major; 
     public int index = 1; 
-    Student(){
-        
-    }
-    
     Student(String fullName, String DoB, String Gender, String Address,String phoneNo, String classID,String Major){
-        this.studentID = convertStudentID(); 
-        this.fullName = fullName;
-        this.DoB = DoB;
+        this.studentID = getStudentID();
+        this.fullName = convertFullName(fullName); 
+        this.DoB = setDoB(DoB);
         this.Gender = Gender;
         this.Address = Address;
         this.Email = convertEmail(); 
@@ -23,7 +16,7 @@ public class Student {
         this.Major = Major; 
     }
     
-    public String convertStudentID(){ // convert to get studentID; 
+    public String getStudentID(){ // convert to get studentID; 
         String res = ""; 
         int DoB = Integer.valueOf(this.DoB.substring(6,10)); 
         int tmp = 0;
@@ -43,42 +36,19 @@ public class Student {
         return res; 
     }
     
-    public String getStudentID(){
-        return this.studentID.toUpperCase(); 
+    public String convertFullName(String fullName){
+        String word[] = fullName.trim().split("\\s++");
+        String res = "";
+        for(int i = 0;i < word.length;i++){
+            res = res + word[i].substring(0,1).toUpperCase() + word[i].substring(1).toLowerCase() + " "; 
+        }
+        return res;
     }
     
-    public void setfullName(String s){
-        this.fullName = s; 
-    }
-    
-    public String getfullName(){
-        return this.fullName; 
-    }
-    
-    public void setDoB(String s){
+    public String setDoB(String s){
         if(s.charAt(1) == '/') s = "0" + s; 
         if(s.charAt(4) == '/') s = s.substring(0,3) + "0" + s.substring(3); 
-        this.DoB = s; 
-    }
-    
-    public String getDoB(){
-        return this.DoB; 
-    }
-    
-    public void setGender(String s){
-        this.Gender = s; 
-    }
-    
-    public String getGender(){
-        return this.Gender; 
-    }
-    
-    public void setAddress(String s){
-        this.Address = s; 
-    }
-    
-    public String getAddress(){
-        return this.Address; 
+        return s;  
     }
     
     public String convertEmail(){ // convert to get Email for student
@@ -90,34 +60,6 @@ public class Student {
         }
         res = res + "." + this.studentID + "@stu.ptit.edu.vn";
         return res.toLowerCase();
-    }
-    
-    public String getEmail(){
-        return this.Email.toLowerCase(); 
-    }
-    
-    public void setPhoneNo(String s){
-        this.phoneNo = s; 
-    }
-    
-    public String getPhoneNo(){
-        return this.phoneNo; 
-    }
-    
-    public void setMajor(String s){
-        this.Major = s; 
-    }
-    
-    public String getMajor(){
-        return this.Major; 
-    }
-    
-    public void setClassID(String s){
-        this.classID = s; 
-    }
-    
-    public String getClassID(){
-        return this.classID;
     }
     
     public void addNewStudent(){
