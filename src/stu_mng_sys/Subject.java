@@ -1,42 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package stu_mng_sys;
 import java.util.*;
 public class Subject {
     private String subjectID, subjectName;
+    private Student student; // Subject class associate with Student class. 
     
-    Subject(){
-        
-    }
-    
-    Subject(String subjectID, String subjectName){
+    Subject(String subjectID, String subjectName, Student student){
         this.subjectID = subjectID;
         this.subjectName = subjectName; 
-    }
-    
-    public void setSubjectID(String s){
-        this.subjectID = s; 
-    }
-    
-    public String getSubjectID(){
-        return this.subjectID; 
-    }
-    
-    public void setSubjectName(String s){
-        this.subjectName = s; 
-    }
-    
-    public String getSubjectName(){
-        return this.subjectName; 
+        this.student = student;
     }
     
     public void addNewProject(){
         
     }
     
-    public void viewModifyInfor(){
+    public void viewModifySubjectInfor(){
         
     }
     
@@ -49,7 +28,7 @@ public class Subject {
     }
     
     public String toString(){
-        return this.subjectID + " " + this.subjectName; 
+        return this.subjectID + " " + this.subjectName + " " + this.student;
     }
     
 }
