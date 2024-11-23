@@ -5,14 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f5665f1-b943-44eb-864c-f6a3a29b1ead" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/stu_mng_sys/classesWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/stu_mng_sys/scoresWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/stu_mng_sys/studentWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/stu_mng_sys/subjectWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/stu_mng_sys/Stu_Mng_Sys.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/stu_mng_sys/Stu_Mng_Sys.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/Stu_Mng_Sys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/Stu_Mng_Sys.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -36,7 +46,7 @@
     "git-widget-placeholder": "tuk3kCS",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/lecture/PTIT/OOP/Stu_Mng_Sys",
+    "last_opened_file_path": "D:/lecture/PTIT/OOP/codePTIT",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -45,6 +55,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="stu_mng_sys" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -70,6 +85,7 @@
       <workItem from="1729530568696" duration="28000" />
       <workItem from="1729662663742" duration="29000" />
       <workItem from="1732273022046" duration="8682000" />
+      <workItem from="1732350174263" duration="10447000" />
     </task>
     <servers />
   </component>
