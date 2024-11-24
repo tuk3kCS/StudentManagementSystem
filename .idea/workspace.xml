@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f5665f1-b943-44eb-864c-f6a3a29b1ead" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/stu_mng_sys/classesWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stu_mng_sys/scoresWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stu_mng_sys/studentWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stu_mng_sys/subjectWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/Stu_Mng_Sys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/Stu_Mng_Sys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/classesWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/classesWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/scoresWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/scoresWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/studentWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/studentWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/subjectWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/subjectWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,23 +37,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.Stu_Mng_Sys.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "tuk3kCS",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/lecture/PTIT/OOP/codePTIT",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Stu_Mng_Sys.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;tuk3kCS&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/lecture/PTIT/OOP/codePTIT&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="stu_mng_sys" />
@@ -86,6 +85,7 @@
       <workItem from="1729662663742" duration="29000" />
       <workItem from="1732273022046" duration="8682000" />
       <workItem from="1732350174263" duration="10447000" />
+      <workItem from="1732417750682" duration="7894000" />
     </task>
     <servers />
   </component>
