@@ -8,20 +8,22 @@ import javax.swing.table.*;
 public class subjectWindow extends JFrame {
     private final JLabel subjectLabel = new JLabel("Subject Management");
     private final JButton addNewSubjectButton = new JButton("Add New Subject");
-    private final JButton newRegistration = new JButton("New Registration");
+    private final JButton newRegistration = new JButton("New/Cancel Registration");
     String[][] subjectInit = {};
     String[] subjectAttributes = {"Student ID", "Student Name", "Class ID", "Subject ID", "Subject Name"};
     private final JTable subjectTable = new JTable(subjectInit, subjectAttributes);
     private final JLabel studentFilterLabel = new JLabel("Search for Student ID");
     private final JTextField studentFilterTextField = new JTextField();
     private final JButton studentFilterButton = new JButton("Search");
+    private final JFrame newRegistrationFormFrame = new JFrame("New/Cancel Registration");
+    private final JFrame newSubjectFormFrame = new JFrame("Add New Subject");
     private final Stu_Mng_Sys mainApp;
 
     public subjectWindow(Stu_Mng_Sys mainApp) {
         //Create student management function window
         super("Subject Management");
         this.mainApp = mainApp;
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1280, 720);
         setLayout(null);
         setLocationRelativeTo(null);
@@ -38,7 +40,10 @@ public class subjectWindow extends JFrame {
         newRegistration.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (!newRegistrationFormFrame.isVisible()) {
+                    newRegistrationFormFrame.setVisible(true); //Show new/cancel registration window
+                    newRegistrationForm();
+                }
             }
         });
         add(newRegistration);
@@ -70,9 +75,108 @@ public class subjectWindow extends JFrame {
         addNewSubjectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (!newSubjectFormFrame.isVisible()) {
+                    newSubjectFormFrame.setVisible(true); //Show add new subject window
+                    newSubjectForm();
+                }
             }
         });
         add(addNewSubjectButton);
+
+        //New registration window
+        newRegistrationFormFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        newRegistrationFormFrame.setSize(640, 480);
+        newRegistrationFormFrame.setLayout(null);
+        newRegistrationFormFrame.setLocationRelativeTo(null);
+        newRegistrationFormFrame.setResizable(false);
+
+        //Add new subject window
+        newSubjectFormFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        newSubjectFormFrame.setSize(640, 480);
+        newSubjectFormFrame.setLayout(null);
+        newSubjectFormFrame.setLocationRelativeTo(null);
+        newSubjectFormFrame.setResizable(false);
+    }
+
+    public void newRegistrationForm() {
+        JPanel formPanel = new JPanel();
+        formPanel.setLayout(null);
+        formPanel.setSize(640, 480);
+        newRegistrationFormFrame.add(formPanel);
+
+        JLabel newRegistrationFormLabel = new JLabel("New/Cancel Registration");
+        newRegistrationFormLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        newRegistrationFormLabel.setBounds(140, 20, 400, 40);
+        formPanel.add(newRegistrationFormLabel);
+
+        JLabel studentIDLabel = new JLabel("Student ID:");
+        studentIDLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        studentIDLabel.setBounds(100, 180, 100, 30);
+        formPanel.add(studentIDLabel);
+
+        JLabel subjectIDLabel = new JLabel("Subject ID:");
+        subjectIDLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        subjectIDLabel.setBounds(100, 230, 100, 30);
+        formPanel.add(subjectIDLabel);
+
+        JTextField studentIDField = new JTextField();
+        studentIDField.setBounds(250, 180, 290, 30);
+        formPanel.add(studentIDField);
+
+        JTextField subjectIDField = new JTextField();
+        subjectIDField.setBounds(250, 230, 290, 30);
+        formPanel.add(subjectIDField);
+
+        JButton submitButton = new JButton("Submit");
+        submitButton.setFont(new Font("Arial", Font.BOLD, 15));
+        submitButton.setBounds(220, 380, 200, 30);
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        formPanel.add(submitButton);
+    }
+
+    public void newSubjectForm() {
+        JPanel formPanel = new JPanel();
+        formPanel.setLayout(null);
+        formPanel.setSize(640, 480);
+        newSubjectFormFrame.add(formPanel);
+
+        JLabel newSubjectFormLabel = new JLabel("Add New Subject");
+        newSubjectFormLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        newSubjectFormLabel.setBounds(200, 20, 300, 40);
+        formPanel.add(newSubjectFormLabel);
+
+        JLabel subjectNameLabel = new JLabel("Subject Name:");
+        subjectNameLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        subjectNameLabel.setBounds(100, 180, 100, 30);
+        formPanel.add(subjectNameLabel);
+
+        JLabel subjectIDLabel = new JLabel("Subject ID:");
+        subjectIDLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        subjectIDLabel.setBounds(100, 230, 100, 30);
+        formPanel.add(subjectIDLabel);
+
+        JTextField subjectNameField = new JTextField();
+        subjectNameField.setBounds(250, 180, 290, 30);
+        formPanel.add(subjectNameField);
+
+        JTextField subjectIDField = new JTextField();
+        subjectIDField.setBounds(250, 230, 290, 30);
+        formPanel.add(subjectIDField);
+
+        JButton submitButton = new JButton("Submit");
+        submitButton.setFont(new Font("Arial", Font.BOLD, 15));
+        submitButton.setBounds(220, 380, 200, 30);
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        formPanel.add(submitButton);
     }
 }
