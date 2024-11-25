@@ -152,7 +152,7 @@ public class subjectWindow extends JFrame {
 
         JLabel subjectNameLabel = new JLabel("Subject Name:");
         subjectNameLabel.setFont(new Font("Arial", Font.BOLD, 15));
-        subjectNameLabel.setBounds(100, 180, 100, 30);
+        subjectNameLabel.setBounds(100, 180, 150, 30);
         formPanel.add(subjectNameLabel);
 
         JLabel subjectIDLabel = new JLabel("Subject ID:");
