@@ -8,6 +8,7 @@ import javax.swing.table.*;
 public class classesWindow extends JFrame {
     private final JLabel classesLabel = new JLabel("Classes Management");
     private final JButton addClassButton = new JButton("Add New Class");
+    private final JButton viewClassesListButton = new JButton("View Classes List");
     String[][] classInit = {};
     String[] classAttributes = {"Student ID", "Full Name", "Date of Birth", "Email"};
     private final JTable classTable = new JTable(classInit, classAttributes);
@@ -15,6 +16,7 @@ public class classesWindow extends JFrame {
     private final JTextField classFilterTextField = new JTextField();
     private final JButton classFilterButton = new JButton("Search");
     private final JFrame newClassFormFrame = new JFrame("Add New Class");
+    private final JFrame viewClassesListFormFrame = new JFrame("Classes List");
     private final Stu_Mng_Sys mainApp;
 
     public classesWindow(Stu_Mng_Sys mainApp) {
@@ -46,7 +48,7 @@ public class classesWindow extends JFrame {
         });
         add(addClassButton);
 
-        //Classes' students table
+        //Classes' students table, import from a separate data file
         JScrollPane studentScrollPane = new JScrollPane(classTable); //Create classes' students table
         add(studentScrollPane);
         studentScrollPane.setBounds(40, 200, 1200, 420);
@@ -63,10 +65,24 @@ public class classesWindow extends JFrame {
         classFilterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Find all records match with the correspond class ID
 
             }
         });
         add(classFilterButton);
+
+        //View classes list function button
+        viewClassesListButton.setBounds(1030, 150, 200, 30);
+        viewClassesListButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!viewClassesListFormFrame.isVisible()) {
+                    viewClassesListFormFrame.setVisible(true); //Show add new subject window
+                    viewClassesListForm();
+                }
+            }
+        });
+        add(viewClassesListButton);
 
         //Add new class window
         newClassFormFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -74,6 +90,13 @@ public class classesWindow extends JFrame {
         newClassFormFrame.setLayout(null);
         newClassFormFrame.setLocationRelativeTo(null);
         newClassFormFrame.setResizable(false);
+
+        //View classes list window
+        viewClassesListFormFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        viewClassesListFormFrame.setSize(640, 480);
+        viewClassesListFormFrame.setLayout(null);
+        viewClassesListFormFrame.setLocationRelativeTo(null);
+        viewClassesListFormFrame.setResizable(false);
     }
 
     public void newClassForm() {
@@ -111,9 +134,30 @@ public class classesWindow extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //When no field is null, save information to the data file and show a message "Added successfully"
 
             }
         });
         formPanel.add(submitButton);
+    }
+
+    public void viewClassesListForm() {
+        JPanel formPanel = new JPanel();
+        formPanel.setLayout(null);
+        formPanel.setSize(640, 480);
+        viewClassesListFormFrame.add(formPanel);
+
+        JLabel viewClassesListFormLabel = new JLabel("Classes List");
+        viewClassesListFormLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        viewClassesListFormLabel.setBounds(220, 20, 300, 40);
+        formPanel.add(viewClassesListFormLabel);
+
+        //Classes list, import from a separate data file
+        String[][] classesInit = {};
+        String[] classesAttributes = {"Class ID", "Major"};
+        JTable classesTable = new JTable(classesInit, classesAttributes);
+        JScrollPane classesScrollPane = new JScrollPane(classesTable); //Create classes list table
+        classesScrollPane.setBounds(40, 80, 550, 330);
+        formPanel.add(classesScrollPane);
     }
 }
