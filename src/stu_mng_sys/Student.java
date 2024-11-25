@@ -22,33 +22,31 @@ public class Student {
     }
     
     public String getStudentID(){ // convert to get studentID; 
-        String res = ""; 
-        int DoB = Integer.valueOf(this.DoB.substring(6)); 
-        int tmp = 0;
-        while(DoB != 0){
-            tmp += DoB % 10; 
-            DoB/=10; 
+        String res = "";
+
+        String dob[] = this.DoB.trim().split("/");
+        int YoB = Integer.valueOf(dob[2].substring(2,4));
+        String courseYear = String.valueOf((YoB+18)%100);
+
+        String major[] = this.Major.trim().split("\\s++");
+        String majorTitle = "";
+        for(int i=0; i<=1; i++){
+            majorTitle += major[i].substring(0,1);
         }
-        tmp += 18;
-        String x = String.valueOf(tmp); 
-        String word[] = this.Major.trim().split("\\s++");
-        String majorTitle = ""; 
-        for(int i = 0;i < word.length;i++){
-            majorTitle += word[i].substring(0,1); 
-        }
-        res = "B"+x.substring(x.length()-2,x.length()) + "DC" + majorTitle + String.format("%03d",index); 
+
+        res = "B" + courseYear + "DC" + majorTitle + String.format("%03d",index);
         return res.toUpperCase(); 
     }
     
     public String convertFullName(String fullName){
-        String word[] = fullName.trim().split("\\s++");
+        String name[] = fullName.trim().split("\\s++");
         String res = "";
-        for(int i = 0;i < word.length;i++){
-            res = res + word[i].substring(0,1).toUpperCase() + word[i].substring(1).toLowerCase() + " "; 
+        for(int i=0 ; i<name.length;i++){
+            res = res + name[i].substring(0,1).toUpperCase() + name[i].substring(1).toLowerCase() + " ";
         }
         return res;
     }
-    
+
     public String setDoB(String s){
         if(s.charAt(1) == '/') s = "0" + s; 
         if(s.charAt(4) == '/') s = s.substring(0,3) + "0" + s.substring(3); 
@@ -56,11 +54,14 @@ public class Student {
     }
     
     public String convertEmail(){ // convert to get Email for student
-        String res = ""; 
-        String word[] = this.fullName.trim().split("\\s++");
-        res = word[word.length-1]; 
-        for(int i = 0;i < word.length-1;i++){
-            res += word[i].substring(0,1); 
+        String res = "";
+
+        String name[] = this.fullName.trim().split("\\s++");
+        String firstname = name[name.length-1];
+        res += name[name.length-1];
+
+        for(int i = 0;i < name.length-1;i++){
+            res += name[i].substring(0,1);
         }
         res = res + "." + getStudentID() + "@stu.ptit.edu.vn";
         return res.toLowerCase();
