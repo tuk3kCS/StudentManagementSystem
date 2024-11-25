@@ -10,7 +10,7 @@ public class classesWindow extends JFrame {
     private final JButton addClassButton = new JButton("Add New Class");
     private final JButton viewClassesListButton = new JButton("View Classes List");
     String[][] classInit = {};
-    String[] classAttributes = {"Student ID", "Full Name", "Date of Birth", "Email"};
+    String[] classAttributes = {"Student ID", "Full Name", "Class ID", "Date of Birth", "Email"};
     private final JTable classTable = new JTable(classInit, classAttributes);
     private final JLabel classFilterLabel = new JLabel("Search for Class ID");
     private final JTextField classFilterTextField = new JTextField();
@@ -135,6 +135,7 @@ public class classesWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //When no field is null, save information to the data file and show a message "Added successfully"
+                //All students with their correspond class ID match with new class's ID will be automatically added into that class
 
             }
         });
