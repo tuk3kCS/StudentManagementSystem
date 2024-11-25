@@ -23,4 +23,4 @@ A software application designed to help educational institutions manage student 
   1. Student Management
   2. Class Management
   3. Subject Management
-  4. Learning Process and Score Management
+  4. Scores Management
