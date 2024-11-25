@@ -46,7 +46,7 @@ public class scoresWindow extends JFrame {
         });
         add(modifyScoresButton);
 
-        //Students' subjects table
+        //Students' subjects table, import from a separate data file
         JScrollPane studentScrollPane = new JScrollPane(scoresTable); //Create students' subjects table
         add(studentScrollPane);
         studentScrollPane.setBounds(40, 200, 1200, 420);
@@ -63,6 +63,7 @@ public class scoresWindow extends JFrame {
         studentFilterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Find all records match with the correspond student ID
 
             }
         });
@@ -126,6 +127,7 @@ public class scoresWindow extends JFrame {
         subjectIDField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //When the student ID and subject ID match the data in data file, return all scores in their correspond text field
 
             }
         });
@@ -153,6 +155,7 @@ public class scoresWindow extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //When no field is null, save information to the data file and show a message "Modified successfully"
 
             }
         });
