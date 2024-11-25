@@ -7,9 +7,6 @@
     <list default="true" id="8f5665f1-b943-44eb-864c-f6a3a29b1ead" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/classesWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/classesWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/scoresWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/scoresWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/studentWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/studentWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/subjectWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/subjectWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +85,7 @@
       <workItem from="1732417750682" duration="9128000" />
       <workItem from="1732461820843" duration="3598000" />
       <workItem from="1732508723531" duration="8505000" />
-      <workItem from="1732544397933" duration="3523000" />
+      <workItem from="1732544397933" duration="3652000" />
     </task>
     <servers />
   </component>
