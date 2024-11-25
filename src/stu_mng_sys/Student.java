@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package stu_mng_sys;
-import java.util.*;
 public class Student {
     private String studentID, fullName, DoB, Gender, Address, Email, phoneNo, classID,Major; 
     public int index = 0; 
@@ -22,16 +21,16 @@ public class Student {
     }
     
     public String getStudentID(){ // convert to get studentID; 
-        String res = "";
+        String res;
 
-        String dob[] = this.DoB.trim().split("/");
-        int YoB = Integer.valueOf(dob[2].substring(2,4));
+        String[] dob = this.DoB.trim().split("/");
+        int YoB = Integer.parseInt(dob[2].substring(2,4));
         String courseYear = String.valueOf((YoB+18)%100);
 
-        String major[] = this.Major.trim().split("\\s++");
-        String majorTitle = "";
+        String[] major = this.Major.trim().split("\\s++");
+        StringBuilder majorTitle = new StringBuilder();
         for(int i=0; i<=1; i++){
-            majorTitle += major[i].substring(0,1);
+            majorTitle.append(major[i].charAt(0));
         }
 
         res = "B" + courseYear + "DC" + majorTitle + String.format("%03d",index);
@@ -39,12 +38,12 @@ public class Student {
     }
     
     public String convertFullName(String fullName){
-        String name[] = fullName.trim().split("\\s++");
-        String res = "";
-        for(int i=0 ; i<name.length;i++){
-            res = res + name[i].substring(0,1).toUpperCase() + name[i].substring(1).toLowerCase() + " ";
+        String[] name = fullName.trim().split("\\s++");
+        StringBuilder res = new StringBuilder();
+        for (String s : name) {
+            res.append(s.substring(0, 1).toUpperCase()).append(s.substring(1).toLowerCase()).append(" ");
         }
-        return res;
+        return res.toString();
     }
 
     public String setDoB(String s){
@@ -54,17 +53,17 @@ public class Student {
     }
     
     public String convertEmail(){ // convert to get Email for student
-        String res = "";
+        StringBuilder res = new StringBuilder();
 
-        String name[] = this.fullName.trim().split("\\s++");
+        String[] name = this.fullName.trim().split("\\s++");
         String firstname = name[name.length-1];
-        res += name[name.length-1];
+        res.append(firstname);
 
         for(int i = 0;i < name.length-1;i++){
-            res += name[i].substring(0,1);
+            res.append(name[i].charAt(0));
         }
-        res = res + "." + getStudentID() + "@stu.ptit.edu.vn";
-        return res.toLowerCase();
+        res.append(".").append(getStudentID()).append("@stu.ptit.edu.vn");
+        return res.toString().toLowerCase();
     }
     
     public void addNewStudent(){
