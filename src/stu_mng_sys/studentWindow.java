@@ -52,7 +52,7 @@ public class studentWindow extends JFrame {
         });
         mainPanel.add(addStudentButton);
 
-        //Students' information table
+        //Students' information table, import from a separate data file
         JScrollPane studentScrollPane = new JScrollPane(studentTable); //Create students' information table
         mainPanel.add(studentScrollPane);
         studentScrollPane.setBounds(40, 200, 1200, 420);
@@ -69,6 +69,7 @@ public class studentWindow extends JFrame {
         studentFilterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Find the record matches with the correspond student ID
 
             }
         });
@@ -100,52 +101,61 @@ public class studentWindow extends JFrame {
 
         JLabel dobLabel = new JLabel("Date of Birth:");
         dobLabel.setFont(new Font("Arial", Font.BOLD, 15));
-        dobLabel.setBounds(100, 130, 100, 30);
+        dobLabel.setBounds(100, 120, 100, 30);
         formPanel.add(dobLabel);
 
         JLabel genderLabel = new JLabel("Gender:");
         genderLabel.setFont(new Font("Arial", Font.BOLD, 15));
-        genderLabel.setBounds(100, 180, 100, 30);
+        genderLabel.setBounds(100, 160, 100, 30);
         formPanel.add(genderLabel);
 
         JLabel addressLabel = new JLabel("Address:");
         addressLabel.setFont(new Font("Arial", Font.BOLD, 15));
-        addressLabel.setBounds(100, 230, 100, 30);
+        addressLabel.setBounds(100, 200, 100, 30);
         formPanel.add(addressLabel);
 
         JLabel phoneLabel = new JLabel("Phone:");
         phoneLabel.setFont(new Font("Arial", Font.BOLD, 15));
-        phoneLabel.setBounds(100, 280, 100, 30);
+        phoneLabel.setBounds(100, 240, 100, 30);
         formPanel.add(phoneLabel);
 
         JLabel classIDLabel = new JLabel("Class ID:");
         classIDLabel.setFont(new Font("Arial", Font.BOLD, 15));
-        classIDLabel.setBounds(100, 330, 100, 30);
+        classIDLabel.setBounds(100, 280, 100, 30);
         formPanel.add(classIDLabel);
+
+        JLabel majorLabel = new JLabel("Major: ");
+        majorLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        majorLabel.setBounds(100, 320, 100, 30);
+        formPanel.add(majorLabel);
 
         JTextField fullNameField = new JTextField();
         fullNameField.setBounds(250, 80, 290, 30);
         formPanel.add(fullNameField);
 
         JTextField dobField = new JTextField();
-        dobField.setBounds(250, 130, 290, 30);
+        dobField.setBounds(250, 120, 290, 30);
         formPanel.add(dobField);
 
         JTextField genderField = new JTextField();
-        genderField.setBounds(250, 180, 290, 30);
+        genderField.setBounds(250, 160, 290, 30);
         formPanel.add(genderField);
 
         JTextField addressField = new JTextField();
-        addressField.setBounds(250, 230, 290, 30);
+        addressField.setBounds(250, 200, 290, 30);
         formPanel.add(addressField);
 
         JTextField phoneField = new JTextField();
-        phoneField.setBounds(250, 280, 290, 30);
+        phoneField.setBounds(250, 240, 290, 30);
         formPanel.add(phoneField);
 
         JTextField classIDField = new JTextField();
-        classIDField.setBounds(250, 330, 290, 30);
+        classIDField.setBounds(250, 280, 290, 30);
         formPanel.add(classIDField);
+
+        JTextField majorField = new JTextField();
+        majorField.setBounds(250, 320, 290, 30);
+        formPanel.add(majorField);
 
         JButton submitButton = new JButton("Submit");
         submitButton.setFont(new Font("Arial", Font.BOLD, 15));
@@ -153,6 +163,7 @@ public class studentWindow extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //When no field is null, save information to the data file and show a message "Added successfully"
 
             }
         });
