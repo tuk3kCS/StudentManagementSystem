@@ -8,7 +8,7 @@ import javax.swing.table.*;
 public class subjectWindow extends JFrame {
     private final JLabel subjectLabel = new JLabel("Subject Management");
     private final JButton addNewSubjectButton = new JButton("Add New Subject");
-    private final JButton newRegistration = new JButton("New/Cancel Registration");
+    private final JButton newRegistrationButton = new JButton("New/Cancel Registration");
     String[][] subjectInit = {};
     String[] subjectAttributes = {"Student ID", "Student Name", "Class ID", "Subject ID", "Subject Name"};
     private final JTable subjectTable = new JTable(subjectInit, subjectAttributes);
@@ -35,9 +35,9 @@ public class subjectWindow extends JFrame {
         subjectLabel.setBounds(440, 50, 500, 60);
         add(subjectLabel);
 
-        //Add new registration function button
-        newRegistration.setBounds(50, 150, 200, 30);
-        newRegistration.addActionListener(new ActionListener() {
+        //New/cancel registration function button
+        newRegistrationButton.setBounds(50, 150, 200, 30);
+        newRegistrationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!newRegistrationFormFrame.isVisible()) {
@@ -46,9 +46,9 @@ public class subjectWindow extends JFrame {
                 }
             }
         });
-        add(newRegistration);
+        add(newRegistrationButton);
 
-        //Students' subjects table
+        //Students' subjects table, import from a separate data file
         JScrollPane studentScrollPane = new JScrollPane(subjectTable); //Create students' subjects table
         add(studentScrollPane);
         studentScrollPane.setBounds(40, 200, 1200, 420);
@@ -65,6 +65,7 @@ public class subjectWindow extends JFrame {
         studentFilterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Find all records match with the correspond student ID
 
             }
         });
@@ -133,6 +134,8 @@ public class subjectWindow extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //When no field is null, save information and show a message "Added/cancelled successfully"
+                //If the data exists, cancel registration. Otherwise, add to the data file
 
             }
         });
@@ -174,6 +177,7 @@ public class subjectWindow extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //When no field is null, save information to the data file and show a message "Added successfully"
 
             }
         });
