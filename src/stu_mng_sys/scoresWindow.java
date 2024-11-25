@@ -14,13 +14,14 @@ public class scoresWindow extends JFrame {
     private final JLabel studentFilterLabel = new JLabel("Search for Student ID");
     private final JTextField studentFilterTextField = new JTextField();
     private final JButton studentFilterButton = new JButton("Search");
+    private final JFrame modifyScoresFormFrame = new JFrame("Modify Scores");
     private final Stu_Mng_Sys mainApp;
 
     public scoresWindow(Stu_Mng_Sys mainApp) {
         //Create student management function window
         super("Scores Management");
         this.mainApp = mainApp;
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1280, 720);
         setLayout(null);
         setLocationRelativeTo(null);
@@ -37,7 +38,10 @@ public class scoresWindow extends JFrame {
         modifyScoresButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (!modifyScoresFormFrame.isVisible()) {
+                    modifyScoresFormFrame.setVisible(true); //Show add new subject window
+                    modifyScoresForm();
+                }
             }
         });
         add(modifyScoresButton);
@@ -63,5 +67,95 @@ public class scoresWindow extends JFrame {
             }
         });
         add(studentFilterButton);
+
+        //Modify scores window
+        modifyScoresFormFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        modifyScoresFormFrame.setSize(640, 480);
+        modifyScoresFormFrame.setLayout(null);
+        modifyScoresFormFrame.setLocationRelativeTo(null);
+        modifyScoresFormFrame.setResizable(false);
+    }
+
+    public void modifyScoresForm() {
+        JPanel formPanel = new JPanel();
+        formPanel.setLayout(null);
+        formPanel.setSize(640, 480);
+        modifyScoresFormFrame.add(formPanel);
+
+        JLabel modifyScoresFormLabel = new JLabel("Modify Student's Scores");
+        modifyScoresFormLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        modifyScoresFormLabel.setBounds(140, 20, 400, 40);
+        formPanel.add(modifyScoresFormLabel);
+
+        JLabel studentIDLabel = new JLabel("Student ID:");
+        studentIDLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        studentIDLabel.setBounds(100, 80, 150, 30);
+        formPanel.add(studentIDLabel);
+
+        JLabel subjectIDLabel = new JLabel("Subject ID:");
+        subjectIDLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        subjectIDLabel.setBounds(100, 130, 150, 30);
+        formPanel.add(subjectIDLabel);
+
+        JLabel attendanceScoreLabel = new JLabel("Attendance Score:");
+        attendanceScoreLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        attendanceScoreLabel.setBounds(100, 180, 150, 30);
+        formPanel.add(attendanceScoreLabel);
+
+        JLabel processScoreLabel = new JLabel("Process Score:");
+        processScoreLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        processScoreLabel.setBounds(100, 230, 150, 30);
+        formPanel.add(processScoreLabel);
+
+        JLabel midtermScoreLabel = new JLabel("Mid-term Score:");
+        midtermScoreLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        midtermScoreLabel.setBounds(100, 280, 150, 30);
+        formPanel.add(midtermScoreLabel);
+
+        JLabel finalScoreLabel = new JLabel("Final Score:");
+        finalScoreLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        finalScoreLabel.setBounds(100, 330, 150, 30);
+        formPanel.add(finalScoreLabel);
+
+        JTextField studentIDField = new JTextField();
+        studentIDField.setBounds(250, 80, 290, 30);
+        formPanel.add(studentIDField);
+
+        JTextField subjectIDField = new JTextField();
+        subjectIDField.setBounds(250, 130, 290, 30);
+        subjectIDField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        formPanel.add(subjectIDField);
+
+        JTextField attendanceScoreField = new JTextField();
+        attendanceScoreField.setBounds(250, 180, 290, 30);
+        formPanel.add(attendanceScoreField);
+
+        JTextField processScoreField = new JTextField();
+        processScoreField.setBounds(250, 230, 290, 30);
+        formPanel.add(processScoreField);
+
+        JTextField midtermScoreField = new JTextField();
+        midtermScoreField.setBounds(250, 280, 290, 30);
+        formPanel.add(midtermScoreField);
+
+        JTextField finalScoreField = new JTextField();
+        finalScoreField.setBounds(250, 330, 290, 30);
+        formPanel.add(finalScoreField);
+
+        JButton submitButton = new JButton("Submit");
+        submitButton.setFont(new Font("Arial", Font.BOLD, 15));
+        submitButton.setBounds(220, 380, 200, 30);
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        formPanel.add(submitButton);
     }
 }
