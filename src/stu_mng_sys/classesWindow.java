@@ -14,13 +14,14 @@ public class classesWindow extends JFrame {
     private final JLabel classFilterLabel = new JLabel("Search for Class ID");
     private final JTextField classFilterTextField = new JTextField();
     private final JButton classFilterButton = new JButton("Search");
+    private final JFrame newClassFormFrame = new JFrame("Add New Class");
     private final Stu_Mng_Sys mainApp;
 
     public classesWindow(Stu_Mng_Sys mainApp) {
         //Create student management function window
         super("Classes Management");
         this.mainApp = mainApp;
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1280, 720);
         setLayout(null);
         setLocationRelativeTo(null);
@@ -37,7 +38,10 @@ public class classesWindow extends JFrame {
         addClassButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (!newClassFormFrame.isVisible()) {
+                    newClassFormFrame.setVisible(true); //Show add new class window
+                    newClassForm();
+                }
             }
         });
         add(addClassButton);
@@ -63,5 +67,53 @@ public class classesWindow extends JFrame {
             }
         });
         add(classFilterButton);
+
+        //Add new class window
+        newClassFormFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        newClassFormFrame.setSize(640, 480);
+        newClassFormFrame.setLayout(null);
+        newClassFormFrame.setLocationRelativeTo(null);
+        newClassFormFrame.setResizable(false);
+    }
+
+    public void newClassForm() {
+        JPanel formPanel = new JPanel();
+        formPanel.setLayout(null);
+        formPanel.setSize(640, 480);
+        newClassFormFrame.add(formPanel);
+
+        JLabel newStudentFormLabel = new JLabel("Add New Class");
+        newStudentFormLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        newStudentFormLabel.setBounds(210, 20, 300, 40);
+        formPanel.add(newStudentFormLabel);
+
+        JLabel classIDLabel = new JLabel("Class ID:");
+        classIDLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        classIDLabel.setBounds(100, 180, 100, 30);
+        formPanel.add(classIDLabel);
+
+        JLabel majorLabel = new JLabel("Major:");
+        majorLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        majorLabel.setBounds(100, 230, 100, 30);
+        formPanel.add(majorLabel);
+
+        JTextField classIDField = new JTextField();
+        classIDField.setBounds(250, 180, 290, 30);
+        formPanel.add(classIDField);
+
+        JTextField majorField = new JTextField();
+        majorField.setBounds(250, 230, 290, 30);
+        formPanel.add(majorField);
+
+        JButton submitButton = new JButton("Submit");
+        submitButton.setFont(new Font("Arial", Font.BOLD, 15));
+        submitButton.setBounds(220, 380, 200, 30);
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        formPanel.add(submitButton);
     }
 }
