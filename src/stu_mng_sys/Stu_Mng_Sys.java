@@ -16,6 +16,8 @@ public class Stu_Mng_Sys extends JFrame {
     }
 
     public Stu_Mng_Sys() {
+        super("Student Management System");
+
         //Create windows for all functions
         stWindow = new studentWindow(this);
         clWindow = new classesWindow(this);
@@ -23,19 +25,18 @@ public class Stu_Mng_Sys extends JFrame {
         scWindow = new scoresWindow(this);
 
         //Create main program frame
-        JFrame mainFrame = new JFrame("Student Management System");
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setSize(1280, 720);
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setResizable(false);
-        mainFrame.setVisible(true);
-        mainFrame.setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1280, 720);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setVisible(true);
+        setLayout(null);
 
         //Create homepage
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(null);
         mainPanel.setBounds(0, 0, 1280, 720);
-        mainFrame.add(mainPanel);
+        add(mainPanel);
 
         //Create contents in homepage
         JLabel mainLabel = new JLabel("Student Management System"); //homepage label
