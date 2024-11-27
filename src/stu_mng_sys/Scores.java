@@ -1,6 +1,5 @@
 
 package stu_mng_sys;
-import java.util.*;
 public class Scores  {
     private float attendanceScore, processScore, midtermScore, finalScore;
     private Student student; // Associate with Student class
@@ -12,7 +11,7 @@ public class Scores  {
     
     public Scores (float attendanceScore, float processScore, float midtermScore, float finalScore, Student student, Subject subject){
         this.attendanceScore = setAttendanceScore(attendanceScore);
-        this.processScore = setAttendanceScore(processScore); 
+        this.processScore = setProcessScore(processScore);
         this.midtermScore = setMidtermScore(midtermScore); 
         this.finalScore = setFinalScore(finalScore);
         this.student = student;
