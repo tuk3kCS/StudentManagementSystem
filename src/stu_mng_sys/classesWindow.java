@@ -48,7 +48,7 @@ public class classesWindow extends JFrame {
         });
         add(addClassButton);
 
-        //Classes' students table, import from a separate data file
+        //Classes' students table, import from data file
         JScrollPane studentScrollPane = new JScrollPane(classTable); //Create classes' students table
         add(studentScrollPane);
         studentScrollPane.setBounds(40, 200, 1200, 420);
@@ -153,7 +153,7 @@ public class classesWindow extends JFrame {
         viewClassesListFormLabel.setBounds(220, 20, 300, 40);
         formPanel.add(viewClassesListFormLabel);
 
-        //Classes list, import from a separate data file
+        //Classes list, import from data file
         String[][] classesInit = {};
         String[] classesAttributes = {"Class ID", "Major"};
         JTable classesTable = new JTable(classesInit, classesAttributes);
