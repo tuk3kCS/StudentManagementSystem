@@ -171,5 +171,4 @@ public class Student {
         this.fullName = convertFullName(fullName); 
         return this.studentID + " " + this.fullName + " " + this.DoB + " " + this.phoneNo + " " + this.Email + " " + this.Gender + " " + this.Address + " " + this.Major + " " + this.classID; 
     }
-    
 }
