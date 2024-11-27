@@ -46,7 +46,7 @@ public class scoresWindow extends JFrame {
         });
         add(modifyScoresButton);
 
-        //Students' subjects table, import from a separate data file
+        //Students' subjects table, import from data file
         JScrollPane studentScrollPane = new JScrollPane(scoresTable); //Create students' subjects table
         add(studentScrollPane);
         studentScrollPane.setBounds(40, 200, 1200, 420);
