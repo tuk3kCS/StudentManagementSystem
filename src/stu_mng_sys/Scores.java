@@ -57,13 +57,8 @@ public class Scores  {
     
     
     public void viewLearningProcess(){
-        //Display student information
-        System.out.println("Student Information: ");
-        System.out.println(student.toString());
-
-        //Display subject information
-        System.out.println("Subject Information: ");
-        System.out.println(subject.toString());
+        //Display scores of student in subject
+        System.out.println("Learning Process for " + student.getFullName() + " in " + subject.getSubjectName());
 
         //Display scores
         System.out.println("Scores: ");
@@ -78,11 +73,26 @@ public class Scores  {
     }
     
     public void ModifyScore(){
-        this.attendanceScore = setAttendanceScore(attendanceScore);
-        this.processScore = setProcessScore(processScore);
-        this.midtermScore = setMidtermScore(midtermScore);
-        this.finalScore = setFinalScore(finalScore);
-        System.out.println("Scores updated successfully");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Modify scores for " + student.getFullName() + " in " + subject.getSubjectName());
+
+        System.out.print("Enter new Attendance Score: ");
+        float newAttendance = sc.nextFloat();
+        setAttendanceScore(newAttendance);
+
+        System.out.print("Enter new Process Score: ");
+        float newProcess = sc.nextFloat();
+        setProcessScore(newProcess);
+
+        System.out.print("Enter new Midterm Score: ");
+        float newMidterm = sc.nextFloat();
+        setMidtermScore(newMidterm);
+
+        System.out.print("Enter new Final Score: ");
+        float newFinal = sc.nextFloat();
+        setFinalScore(newFinal);
+
+        System.out.println("Scores updated successfully!");
 
         //Display updated scores
         viewLearningProcess();

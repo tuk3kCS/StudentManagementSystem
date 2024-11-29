@@ -22,7 +22,7 @@ public class Student {
         index++;
     }
     
-    private String getStudentID(){ // convert to get studentID;
+    public String getStudentID(){ // convert to get studentID;
         String res;
 
         String[] dob = this.DoB.trim().split("/");
@@ -39,7 +39,7 @@ public class Student {
         return res.toUpperCase(); 
     }
     
-    private String convertFullName(String fullName){
+    public String convertFullName(String fullName){
         String[] name = fullName.trim().split("\\s++");
         StringBuilder res = new StringBuilder();
         for (String s : name) {
@@ -48,13 +48,13 @@ public class Student {
         return res.toString();
     }
 
-    private String setDoB(String s){
+    public String setDoB(String s){
         if(s.charAt(1) == '/') s = "0" + s; 
         if(s.charAt(4) == '/') s = s.substring(0,3) + "0" + s.substring(3); 
         return s;  
     }
     
-    private String convertEmail(){ // convert to get Email for student
+    public String convertEmail(){ // convert to get Email for student
         StringBuilder res = new StringBuilder();
 
         String[] name = this.fullName.trim().split("\\s++");
@@ -66,6 +66,10 @@ public class Student {
         }
         res.append(".").append(getStudentID()).append("@stu.ptit.edu.vn");
         return res.toString().toLowerCase();
+    }
+
+    public String getFullName() {
+        return this.fullName;
     }
 
     public static void addNewStudent(){
@@ -116,7 +120,7 @@ public class Student {
         }
         //Display the information of student
         System.out.println("Student information:");
-        System.out.println(foundStudent);
+        System.out.println(foundStudent.toString());
 
         //Modify the information of student
         System.out.println("Do you want to modify the student information? (y/n) ");

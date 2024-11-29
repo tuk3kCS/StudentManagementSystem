@@ -1,16 +1,19 @@
-
 package stu_mng_sys;
 import java.util.*;
 public class Subject {
     private String subjectID, subjectName;
-    private Student student; // Subject class associate with Student class. 
+    private ArrayList<Student> enrolledStudents; // Danh sách sinh viên đã đăng ký.
     
     Subject(String subjectID, String subjectName, Student student){
         this.subjectID = subjectID;
         this.subjectName = subjectName; 
-        this.student = student;
+        this.enrolledStudents = new ArrayList<>();
     }
-    
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
     public void addNewSubject(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter subject ID: ");
@@ -41,23 +44,32 @@ public class Subject {
             System.out.println("Subject is not existed.");
         }
     }
-    
-    public void subjectRegistering(Student student){
-        this.student = student;
-        System.out.println("Student " + student.toString() + " has been registered for subject " + subjectName + ".");
-    }
-    
-    public void subjectCanceling(Student student){
-        if(this.student.equals(student)){
-            this.student = null;
-            System.out.println("Student " + student.toString() + " has been cancelled for subject " + subjectName + ".");
-        }else{
-            System.out.println("Student did not register for this subject.");
+
+    // Đăng ký môn học cho sinh viên
+    public void subjectRegistering(Student student) {
+        if (!enrolledStudents.contains(student)) {
+            enrolledStudents.add(student);
+            System.out.println("Student " + student.getFullName() + " has been registered for subject " + subjectName);
+        } else {
+            System.out.println("Student " + student.getFullName() + " is already registered for this subject.");
         }
     }
-    
-    public String toString(){
-        return this.subjectID + " " + this.subjectName + " " + this.student;
+
+    // Hủy đăng ký môn học cho sinh viên
+    public void subjectCanceling(Student student) {
+        if (enrolledStudents.remove(student)) {
+            System.out.println("Student " + student.getFullName() + " has been canceled from subject " + subjectName);
+        } else {
+            System.out.println("Student " + student.getFullName() + " is not registered for this subject.");
+        }
     }
-    
+
+    @Override
+    public String toString() {
+        StringBuilder studentNames = new StringBuilder();
+        for (Student student : enrolledStudents) {
+            studentNames.append(student.getFullName()).append(", ");
+        }
+        return "Subject ID: " + subjectID + ", Subject Name: " + subjectName + ", Enrolled Students:  + studentNames.toString() + ";
+    }
 }
