@@ -19,10 +19,10 @@ public class Student {
         this.classID = classID; 
         this.Major = Major; 
         this.studentID = "";
-        index++; 
+        index++;
     }
     
-    public String getStudentID(){ // convert to get studentID; 
+    private String getStudentID(){ // convert to get studentID;
         String res;
 
         String[] dob = this.DoB.trim().split("/");
@@ -39,7 +39,7 @@ public class Student {
         return res.toUpperCase(); 
     }
     
-    public String convertFullName(String fullName){
+    private String convertFullName(String fullName){
         String[] name = fullName.trim().split("\\s++");
         StringBuilder res = new StringBuilder();
         for (String s : name) {
@@ -48,13 +48,13 @@ public class Student {
         return res.toString();
     }
 
-    public String setDoB(String s){
+    private String setDoB(String s){
         if(s.charAt(1) == '/') s = "0" + s; 
         if(s.charAt(4) == '/') s = s.substring(0,3) + "0" + s.substring(3); 
         return s;  
     }
     
-    public String convertEmail(){ // convert to get Email for student
+    private String convertEmail(){ // convert to get Email for student
         StringBuilder res = new StringBuilder();
 
         String[] name = this.fullName.trim().split("\\s++");
@@ -67,8 +67,8 @@ public class Student {
         res.append(".").append(getStudentID()).append("@stu.ptit.edu.vn");
         return res.toString().toLowerCase();
     }
-    
-    public void addNewStudent(){
+
+    public static void addNewStudent(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter full name: ");
         String fullName = sc.nextLine();
@@ -116,7 +116,7 @@ public class Student {
         }
         //Display the information of student
         System.out.println("Student information:");
-        System.out.println(foundStudent.toString());
+        System.out.println(foundStudent);
 
         //Modify the information of student
         System.out.println("Do you want to modify the student information? (y/n) ");
@@ -163,7 +163,7 @@ public class Student {
             System.out.println("Student information updated successfully!");
         }
     }
-    
+
     public String toString(){
         this.DoB = setDoB(DoB);
         this.studentID = getStudentID();
