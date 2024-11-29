@@ -48,7 +48,7 @@ public class subjectWindow extends JFrame {
         });
         add(newRegistrationButton);
 
-        //Students' subjects table, import from a separate data file
+        //Students' subjects table, import from data file
         JScrollPane studentScrollPane = new JScrollPane(subjectTable); //Create students' subjects table
         add(studentScrollPane);
         studentScrollPane.setBounds(40, 200, 1200, 420);
@@ -136,6 +136,7 @@ public class subjectWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //When no field is null, save information and show a message "Added/cancelled successfully"
                 //If the data exists, cancel registration. Otherwise, add to the data file
+                //Update table by pushing the data from data file again
 
             }
         });
