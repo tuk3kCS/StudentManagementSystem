@@ -2,8 +2,9 @@ package stu_mng_sys;
 import java.io.*;
 import java.util.*;
 public class Classes implements Serializable {
-    private String classID, Major;
-    private ArrayList<Student> students; //Composition: A class has many students.
+    private final String classID;
+    private final String Major;
+    private final ArrayList<Student> students; //Composition: A class has many students.
 
     public Classes(String classID, String Major, ArrayList<Student> students) {
         this.classID = classID;
