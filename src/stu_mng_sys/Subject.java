@@ -2,8 +2,9 @@ package stu_mng_sys;
 import java.util.*;
 import java.io.*;
 public class Subject implements Serializable {
-    private String subjectID, subjectName;
-    private ArrayList<Student> enrolledStudents; // Danh sách sinh viên đã đăng ký.
+    private final String subjectID;
+    private String subjectName;
+    private final ArrayList<Student> enrolledStudents; // Danh sách sinh viên đã đăng ký.
     
     public Subject(String subjectID, String subjectName){
         this.subjectID = subjectID;
