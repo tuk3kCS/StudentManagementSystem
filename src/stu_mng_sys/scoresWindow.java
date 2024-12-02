@@ -2,23 +2,25 @@ package stu_mng_sys;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
 public class scoresWindow extends JFrame {
     private final JLabel scoresLabel = new JLabel("Scores Management");
     private final JButton modifyScoresButton = new JButton("Modify Scores");
-    String[][] scoresInit = {};
-    String[] scoresAttributes = {"Student ID", "Student Name", "Class ID", "Subject ID", "Attendance Score", "Process Score", "Midterm Score", "Final Score", "GPA"};
-    private final JTable scoresTable = new JTable(scoresInit, scoresAttributes);
+    private final JTable scoresTable = new JTable(new DefaultTableModel(new Object[][]{}, new Object[]{"Full Name", "Class ID", "Subject ID", "Subject Name", "Attendance Score", "Process Score", "Midterm Score", "Final Score", "GPA"}));
     private final JLabel studentFilterLabel = new JLabel("Search for Student ID");
     private final JTextField studentFilterTextField = new JTextField();
     private final JButton studentFilterButton = new JButton("Search");
     private final JFrame modifyScoresFormFrame = new JFrame("Modify Scores");
+    private ArrayList<Scores> scoresArrayList = new ArrayList<>();
+    private File scoresFile = new File("scores.in");
     private final Stu_Mng_Sys mainApp;
 
     public scoresWindow(Stu_Mng_Sys mainApp) {
-        //Create student management function window
+        //Tạo cửa sổ
         super("Scores Management");
         this.mainApp = mainApp;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -27,31 +29,39 @@ public class scoresWindow extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        //Create contents in this window
-        //Window's label
+        //Tạo nội dung trong cửa sổ này
         scoresLabel.setFont(new Font("Arial", Font.BOLD, 40));
         scoresLabel.setBounds(440, 50, 500, 60);
         add(scoresLabel);
 
-        //Add new student function button
+        //Nút sửa điểm
         modifyScoresButton.setBounds(50, 150, 200, 30);
         modifyScoresButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!modifyScoresFormFrame.isVisible()) {
-                    modifyScoresFormFrame.setVisible(true); //Show add new subject window
-                    modifyScoresForm();
+                    modifyScoresFormFrame.setVisible(true); //Cửa sổ sửa điểm
+                    modifyScores();
                 }
             }
         });
         add(modifyScoresButton);
 
-        //Students' subjects table, import from data file
+        //Bảng hiển thị các môn sinh viên đang theo học
         JScrollPane studentScrollPane = new JScrollPane(scoresTable); //Create students' subjects table
         add(studentScrollPane);
         studentScrollPane.setBounds(40, 200, 1200, 420);
 
-        //Student filter
+        //Tải toàn bộ dữ liệu từ file vào mảng scoresArrayList khi cửa sổ hoạt động
+        if (scoresFile.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(scoresFile))){
+                scoresArrayList = (ArrayList<Scores>) ois.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //Bộ lọc sinh viên
         studentFilterLabel.setFont(new Font("Arial", Font.BOLD, 15));
         studentFilterLabel.setBounds(350, 150, 200, 30);
         add(studentFilterLabel);
@@ -63,13 +73,29 @@ public class scoresWindow extends JFrame {
         studentFilterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Find all records match with the correspond student ID
-
+                //Tìm tất cả các bản ghi (danh sách môn học sinh viên này đang theo học) khớp với mã môn học đã cho
+                DefaultTableModel model = (DefaultTableModel) scoresTable.getModel();
+                model.setRowCount(0);
+                String text = studentFilterTextField.getText();
+                for (Scores scores : scoresArrayList) {
+                    if (text.equals(scores.getStudent().getStudentID())) {
+                        String fullName = scores.getStudent().getFullName();
+                        String classID = scores.getStudent().getClassID();
+                        String subjectID = scores.getSubject().getSubjectID();
+                        String subjectName = scores.getSubject().getSubjectName();
+                        float attendanceScore = scores.getAttendanceScore();
+                        float processScore = scores.getProcessScore();
+                        float midtermScore = scores.getMidtermScore();
+                        float finalScore = scores.getFinalScore();
+                        float GPA = scores.getGPA();
+                        model.addRow(new Object[]{fullName, classID, subjectID, subjectName, attendanceScore, processScore, midtermScore, finalScore, GPA});
+                    }
+                }
             }
         });
         add(studentFilterButton);
 
-        //Modify scores window
+        //Cửa sổ sửa điểm
         modifyScoresFormFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         modifyScoresFormFrame.setSize(640, 480);
         modifyScoresFormFrame.setLayout(null);
@@ -77,7 +103,7 @@ public class scoresWindow extends JFrame {
         modifyScoresFormFrame.setResizable(false);
     }
 
-    public void modifyScoresForm() {
+    public void modifyScores() {
         JPanel formPanel = new JPanel();
         formPanel.setLayout(null);
         formPanel.setSize(640, 480);
@@ -119,18 +145,11 @@ public class scoresWindow extends JFrame {
         formPanel.add(finalScoreLabel);
 
         JTextField studentIDField = new JTextField();
-        studentIDField.setBounds(250, 80, 290, 30);
+        studentIDField.setBounds(250, 80, 140, 30);
         formPanel.add(studentIDField);
 
         JTextField subjectIDField = new JTextField();
-        subjectIDField.setBounds(250, 130, 290, 30);
-        subjectIDField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //When the student ID and subject ID match the data in data file, return all scores in their correspond text field
-
-            }
-        });
+        subjectIDField.setBounds(250, 130, 140, 30);
         formPanel.add(subjectIDField);
 
         JTextField attendanceScoreField = new JTextField();
@@ -149,16 +168,77 @@ public class scoresWindow extends JFrame {
         finalScoreField.setBounds(250, 330, 290, 30);
         formPanel.add(finalScoreField);
 
+        JButton findStudentButton = new JButton("Find Student");
+        findStudentButton.setBounds(400, 105, 140, 30);
+        findStudentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Nếu cả mã sinh viên và mã môn học đều tồn tại, hiển toàn bộ thông tin trong các trường
+                String studentIDQuery = studentIDField.getText();
+                String subjectIDQuery = subjectIDField.getText();
+                for (Scores scores : scoresArrayList) {
+                    if (scores.getStudent().getStudentID().equals(studentIDQuery) && scores.getSubject().getSubjectID().equals(subjectIDQuery)) {
+                        attendanceScoreField.setText(String.valueOf(scores.getAttendanceScore()));
+                        processScoreField.setText(String.valueOf(scores.getProcessScore()));
+                        midtermScoreField.setText(String.valueOf(scores.getMidtermScore()));
+                        finalScoreField.setText(String.valueOf(scores.getFinalScore()));
+                        break;
+                    }
+                    else {
+                        attendanceScoreField.setText("");
+                        processScoreField.setText("");
+                        midtermScoreField.setText("");
+                        finalScoreField.setText("");
+                    }
+                }
+            }
+        });
+        formPanel.add(findStudentButton);
+
         JButton submitButton = new JButton("Submit");
         submitButton.setFont(new Font("Arial", Font.BOLD, 15));
         submitButton.setBounds(220, 380, 200, 30);
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //When no field is null, save information to the data file and show a message "Modified successfully"
+                //Khi không có trường trống, lưu thng tin vào file dữ liệu và hiển thị tin nhắn đã thay đổi thành công.
 
+                String studentIDQuery = studentIDField.getText();
+                String subjectIDQuery = subjectIDField.getText();
+
+                for (Scores scores : scoresArrayList) {
+                    if (scores.getStudent().getStudentID().equals(studentIDQuery) && scores.getSubject().getSubjectID().equals(subjectIDQuery)) {
+                        float attendanceScore = Float.parseFloat(attendanceScoreField.getText());
+                        float processScore = Float.parseFloat(processScoreField.getText());
+                        float midtermScore = Float.parseFloat(midtermScoreField.getText());
+                        float finalScore = Float.parseFloat(finalScoreField.getText());
+                        float GPA = attendanceScore * 10 / 100 + processScore * 10 / 100 + midtermScore * 20 / 100 + finalScore * 60 / 100;
+                        scores.setAttendanceScore(attendanceScore);
+                        scores.setProcessScore(processScore);
+                        scores.setMidtermScore(midtermScore);
+                        scores.setFinalScore(finalScore);
+                        scores.setGPA(GPA);
+                        break;
+                    }
+                }
+
+                saveDataFromList(scoresArrayList);
+                JOptionPane.showMessageDialog(null, "Modified successfully.");
+                attendanceScoreField.setText("");
+                processScoreField.setText("");
+                midtermScoreField.setText("");
+                finalScoreField.setText("");
             }
         });
         formPanel.add(submitButton);
+    }
+
+    //Hàm này dùng để lưu dữ liệu vào file từ mảng scoresArrayList
+    public void saveDataFromList(ArrayList<Scores> scoresArrayList) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(scoresFile))){
+            oos.writeObject(scoresArrayList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

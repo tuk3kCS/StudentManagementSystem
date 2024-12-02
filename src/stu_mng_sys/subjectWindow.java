@@ -2,6 +2,8 @@ package stu_mng_sys;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -9,18 +11,19 @@ public class subjectWindow extends JFrame {
     private final JLabel subjectLabel = new JLabel("Subject Management");
     private final JButton addNewSubjectButton = new JButton("Add New Subject");
     private final JButton newRegistrationButton = new JButton("New/Cancel Registration");
-    String[][] subjectInit = {};
-    String[] subjectAttributes = {"Student ID", "Student Name", "Class ID", "Subject ID", "Subject Name"};
-    private final JTable subjectTable = new JTable(subjectInit, subjectAttributes);
-    private final JLabel studentFilterLabel = new JLabel("Search for Student ID");
-    private final JTextField studentFilterTextField = new JTextField();
-    private final JButton studentFilterButton = new JButton("Search");
+    private final JTable subjectTable = new JTable(new DefaultTableModel(new Object[][]{}, new Object[]{"Student ID", "Full Name", "Class ID", "Subject ID", "Subject Name"}));
+    private final JLabel subjectFilterLabel = new JLabel("Search for Subject ID");
+    private final JTextField subjectFilterTextField = new JTextField();
+    private final JButton subjectFilterButton = new JButton("Search");
     private final JFrame newRegistrationFormFrame = new JFrame("New/Cancel Registration");
     private final JFrame newSubjectFormFrame = new JFrame("Add New Subject");
+    private ArrayList<Subject> subjectArrayList = new ArrayList<>();
+    private File subjectFile = new File("subject.in");
+    private File scoresFile = new File("scores.in");
     private final Stu_Mng_Sys mainApp;
 
     public subjectWindow(Stu_Mng_Sys mainApp) {
-        //Create student management function window
+        //Tạo cửa sổ
         super("Subject Management");
         this.mainApp = mainApp;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -29,69 +32,90 @@ public class subjectWindow extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        //Create contents in this window
-        //Window's label
+        //Tạo nội dung trong cửa sổ này
         subjectLabel.setFont(new Font("Arial", Font.BOLD, 40));
         subjectLabel.setBounds(440, 50, 500, 60);
         add(subjectLabel);
 
-        //New/cancel registration function button
+        //Nút thêm/xóa đăng ký môn học
         newRegistrationButton.setBounds(50, 150, 200, 30);
         newRegistrationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!newRegistrationFormFrame.isVisible()) {
-                    newRegistrationFormFrame.setVisible(true); //Show new/cancel registration window
-                    newRegistrationForm();
+                    newRegistrationFormFrame.setVisible(true); //Hiển thị cửa sổ thêm/xóa đăng ký môn học
+                    subjectRegistrationCancellation();
                 }
             }
         });
         add(newRegistrationButton);
 
-        //Students' subjects table, import from data file
+        //Bảng danh sách sinh viên theo học môn học
         JScrollPane studentScrollPane = new JScrollPane(subjectTable); //Create students' subjects table
         add(studentScrollPane);
         studentScrollPane.setBounds(40, 200, 1200, 420);
 
-        //Student filter
-        studentFilterLabel.setFont(new Font("Arial", Font.BOLD, 15));
-        studentFilterLabel.setBounds(350, 150, 200, 30);
-        add(studentFilterLabel);
+        //Tải toàn bộ dữ liệu từ file vào mảng subjectArrayList khi cửa sổ hoạt động
+        if (subjectFile.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(subjectFile))){
+                subjectArrayList = (ArrayList<Subject>) ois.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 
-        studentFilterTextField.setBounds(530, 150, 200, 30);
-        add(studentFilterTextField);
+        //Bộ lọc môn học
+        subjectFilterLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        subjectFilterLabel.setBounds(350, 150, 200, 30);
+        add(subjectFilterLabel);
 
-        studentFilterButton.setBounds(750, 150, 200, 30);
-        studentFilterButton.addActionListener(new ActionListener() {
+        subjectFilterTextField.setBounds(530, 150, 200, 30);
+        add(subjectFilterTextField);
+
+        subjectFilterButton.setBounds(750, 150, 200, 30);
+        subjectFilterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Find all records match with the correspond student ID
-
+                //Tìm tất cả các bản ghi (danh sách sinh viên theo học môn học này) khớp với mã môn học đã cho
+                DefaultTableModel model = (DefaultTableModel) subjectTable.getModel();
+                model.setRowCount(0);
+                String text = subjectFilterTextField.getText();
+                for (Subject subject : subjectArrayList) {
+                    if (text.equals(subject.getSubjectID())) {
+                        for (Student student : subject.getStudentList()) {
+                            String studentID = student.getStudentID();
+                            String fullName = student.getFullName();
+                            String classID = student.getClassID();
+                            model.addRow(new Object[]{studentID, fullName, classID, subject.getSubjectID(), subject.getSubjectName()});
+                        }
+                        break;
+                    }
+                }
             }
         });
-        add(studentFilterButton);
+        add(subjectFilterButton);
 
-        //Add new subject function button
+        //Nút thêm mới môn học
         addNewSubjectButton.setBounds(1030, 150, 200, 30);
         addNewSubjectButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!newSubjectFormFrame.isVisible()) {
                     newSubjectFormFrame.setVisible(true); //Show add new subject window
-                    newSubjectForm();
+                    addNewSubject();
                 }
             }
         });
         add(addNewSubjectButton);
 
-        //New registration window
+        //Cửa sổ thêm/xóa đăng ký môn học
         newRegistrationFormFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         newRegistrationFormFrame.setSize(640, 480);
         newRegistrationFormFrame.setLayout(null);
         newRegistrationFormFrame.setLocationRelativeTo(null);
         newRegistrationFormFrame.setResizable(false);
 
-        //Add new subject window
+        //Cửa số thêm mới môn học
         newSubjectFormFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         newSubjectFormFrame.setSize(640, 480);
         newSubjectFormFrame.setLayout(null);
@@ -99,7 +123,7 @@ public class subjectWindow extends JFrame {
         newSubjectFormFrame.setResizable(false);
     }
 
-    public void newRegistrationForm() {
+    public void subjectRegistrationCancellation() {
         JPanel formPanel = new JPanel();
         formPanel.setLayout(null);
         formPanel.setSize(640, 480);
@@ -134,16 +158,72 @@ public class subjectWindow extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //When no field is null, save information and show a message "Added/cancelled successfully"
-                //If the data exists, cancel registration. Otherwise, add to the data file
-                //Update table by pushing the data from data file again
+                //Khi không có trường trống, lưu thông tin vào file dữ liệu và hiển thị tin nhắn đã thêm/xóa đăng ký thành công.
+                //Nếu dữ liệu đã tồn tại, xóa đăng ký môn học. Ngược lại, thêm đăng ký môn học.
 
+                String studentID = studentIDField.getText();
+                String subjectID = subjectIDField.getText();
+
+                if (subjectID.isEmpty() || studentID.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please fill all the fields.");
+                }
+
+                ArrayList<Student> studentArrayList = new ArrayList<>();
+                try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("student.in"))){
+                    studentArrayList = (ArrayList<Student>) ois.readObject();
+                } catch (IOException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+                for (Subject subject : subjectArrayList) {
+                    if (subject.getSubjectID().equals(subjectID) && !subject.studentList.isEmpty()) {
+                        int cancelled = 0;
+                        for (Student studentInList : subject.studentList) {
+                            if (studentInList.getStudentID().equals(studentID)) {
+                                subject.studentList.remove(studentInList);
+                                cancelled = 1;
+
+                                ArrayList<Scores> scoresArrayList = new ArrayList<>();
+                                if (scoresFile.exists()) {
+                                    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("scores.in"))){
+                                        scoresArrayList = (ArrayList<Scores>) ois.readObject();
+                                    } catch (IOException | ClassNotFoundException ex) {
+                                        ex.printStackTrace();
+                                    }
+                                }
+                                for (Scores scores : scoresArrayList) {
+                                    if (scores.getStudent().getStudentID().equals(studentID) && scores.getSubject().getSubjectID().equals(subjectID)) {
+                                        scoresArrayList.remove(scores);
+                                        break;
+                                    }
+                                }
+                                try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("scores.in"))){
+                                    oos.writeObject(scoresArrayList);
+                                } catch (IOException ex) {
+                                    ex.printStackTrace();
+                                }
+
+                                JOptionPane.showMessageDialog(null, "Cancelled successfully.");
+                                break;
+                            }
+                        }
+                        if (cancelled == 0) {
+                            addStudentToSubjectList(studentID, studentArrayList, subject);
+                        }
+                    }
+                    else {
+                        addStudentToSubjectList(studentID, studentArrayList, subject);
+                    }
+                }
+
+                saveDataFromList(subjectArrayList);
+                studentIDField.setText("");
+                subjectIDField.setText("");
             }
         });
         formPanel.add(submitButton);
     }
 
-    public void newSubjectForm() {
+    public void addNewSubject() {
         JPanel formPanel = new JPanel();
         formPanel.setLayout(null);
         formPanel.setSize(640, 480);
@@ -178,10 +258,62 @@ public class subjectWindow extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //When no field is null, save information to the data file and show a message "Added successfully"
+                //Khi không có trường trống, lưu thng tin vào file dữ liệu và hiển thị tin nhắn đã thêm thành công.
 
+                String subjectID = subjectIDField.getText().toUpperCase();
+                String subjectName = subjectNameField.getText();
+
+                if (subjectID.isEmpty() || subjectName.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please fill all the fields.");
+                }
+
+                else {
+                    ArrayList<Student> studentArrayList = new ArrayList<>();
+                    Subject newSubject = new Subject(subjectID, subjectName, studentArrayList);
+                    subjectArrayList.add(newSubject);
+                    saveDataFromList(subjectArrayList);
+                    JOptionPane.showMessageDialog(null, "Added successfully.");
+                    subjectIDField.setText("");
+                    subjectNameField.setText("");
+                }
             }
         });
         formPanel.add(submitButton);
+    }
+
+    //Hàm này dùng để lưu dữ liệu vào file từ mảng subjectArrayList
+    public void saveDataFromList(ArrayList<Subject> subjectArrayList) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(subjectFile))){
+            oos.writeObject(subjectArrayList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Hàm này dùng để thêm mới sinh viên vào danh sách sinh viên đang theo học môn học, đồng thời tạo bảng điểm của môn cho sinh viên.
+    public void addStudentToSubjectList(String studentID, ArrayList<Student> studentArrayList, Subject subject) {
+        for (Student student : studentArrayList) {
+            if (student.getStudentID().equals(studentID)) {
+                subject.studentList.add(student);
+
+                ArrayList<Scores> scoresArrayList = new ArrayList<>();
+                if (scoresFile.exists()) {
+                    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(scoresFile))){
+                        scoresArrayList = (ArrayList<Scores>) ois.readObject();
+                    } catch (IOException | ClassNotFoundException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                scoresArrayList.add(new Scores(student, subject));
+                try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(scoresFile))){
+                    oos.writeObject(scoresArrayList);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                JOptionPane.showMessageDialog(null, "Registered successfully.");
+                break;
+            }
+        }
     }
 }
