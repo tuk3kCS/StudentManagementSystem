@@ -361,7 +361,7 @@ public class studentWindow extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Khi không có trường trống, lưu thng tin vào file dữ liệu và hiển thị tin nhắn đã thay đổi thành công.
+                //Khi không có trường trống, lưu thông tin vào file dữ liệu và hiển thị tin nhắn đã thay đổi thành công.
                 //Cập nhật bảng thông tin sinh viên bằng cách tải lại dữ liệu một lần nữa.
 
                 String studentID = studentIDTextField.getText();
