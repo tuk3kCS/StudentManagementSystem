@@ -1,12 +1,9 @@
 package stu_mng_sys;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
 
 class Student implements Serializable {
-    @Serial
     private static final long serialVersionUID = 1L;
-
     private String studentID, fullName, DoB, gender, address, email, phoneNo, classID, major;
     private static int index = 1;
 
