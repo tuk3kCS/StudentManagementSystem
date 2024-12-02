@@ -8,9 +8,6 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 public class studentWindow extends JFrame implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
-
     private final JLabel studentLabel = new JLabel("Student Management");
     private final JButton addStudentButton = new JButton("Add New Student");
     private final JButton modifyInfoButton = new JButton("Modify Information");
