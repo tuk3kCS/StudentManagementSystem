@@ -17,7 +17,7 @@ public class studentWindow extends JFrame implements Serializable {
     private final JButton studentFilterButton = new JButton("Search");
     private final JFrame newStudentFormFrame = new JFrame("Add New Student");
     private final JFrame modifyInformationFormFrame = new JFrame("Modify Student's Information");
-    private ArrayList<Student> studentArrayList = new ArrayList<>();
+    public ArrayList<Student> studentArrayList = new ArrayList<>();
     private File studentFile = new File("student.in");
     private final Stu_Mng_Sys mainApp;
 
