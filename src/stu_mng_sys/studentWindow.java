@@ -12,17 +12,17 @@ public class studentWindow extends JFrame implements Serializable {
     private final JButton addStudentButton = new JButton("Add New Student");
     private final JButton modifyInfoButton = new JButton("Modify Information");
     private final JTable studentTable = new JTable(new DefaultTableModel(new Object[][]{}, new Object[]{"Student ID", "Full Name", "Date of Birth", "Gender", "Address", "Email", "Phone Number", "Class", "Major"}));
-    private final JLabel studentFilterLabel = new JLabel("Search for Student ID");
+    private final JLabel studentFilterLabel = new JLabel("Search for anything");
     private final JTextField studentFilterTextField = new JTextField();
     private final JButton studentFilterButton = new JButton("Search");
     private final JFrame newStudentFormFrame = new JFrame("Add New Student");
     private final JFrame modifyInformationFormFrame = new JFrame("Modify Student's Information");
-    private ArrayList<Student> studentArrayList = new ArrayList<>();
+    public ArrayList<Student> studentArrayList = new ArrayList<>();
     private File studentFile = new File("student.in");
     private final Stu_Mng_Sys mainApp;
 
     public studentWindow(Stu_Mng_Sys mainApp) {
-        //Create student management function window
+        //Tạo cửa sổ
         super("Student Management");
         this.mainApp = mainApp;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -31,41 +31,36 @@ public class studentWindow extends JFrame implements Serializable {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        //Main panel
+        //Panel chính
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(null);
         mainPanel.setBounds(0, 0, 1280, 720);
         add(mainPanel);
 
-        //Create contents in this window
-        //Window's label
+        //Tạo nội dung trong cửa sổ
         studentLabel.setFont(new Font("Arial", Font.BOLD, 40));
         studentLabel.setBounds(440, 50, 500, 60);
         mainPanel.add(studentLabel);
 
-        //Add new student function button
+        //Nút thêm mới sinh viên
         addStudentButton.setBounds(50, 150, 200, 30);
         addStudentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!newStudentFormFrame.isVisible()) {
-                    newStudentFormFrame.setVisible(true); //Show add new student window
+                    newStudentFormFrame.setVisible(true); //Hiển thị cửa số thêm mới sinh viên
                     addNewStudent();
                 }
             }
         });
         mainPanel.add(addStudentButton);
 
-        //Students' information table
-        JScrollPane studentScrollPane = new JScrollPane(studentTable); //Create students' information table
+        //Bảng thông tin sinh viên
+        JScrollPane studentScrollPane = new JScrollPane(studentTable);
         mainPanel.add(studentScrollPane);
         studentScrollPane.setBounds(40, 200, 1200, 420);
 
-        //Test data
-        //studentArrayList.add(new Student("Dinh Quyet Thang", "06/09/2004", "Nam", "Hạ Long, Quảng Ninh", "0123456789", "E22CQCN03-B", "Công nghệ thông tin - CLC"));
-        //studentArrayList.add(new Student("Nguyen Hoang Tung", "03/08/2004", "Nam", "Thanh Xuân, Hà Nội", "0983830780", "E22CQCN03-B", "Công nghệ thông tin - CLC"));
-
-        //Load all data to the table when active
+        //Tải toàn bộ dữ liệu từ file vào mảng studentArrayList và bảng khi cửa sổ hoạt động
         if (studentFile.exists()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(studentFile))){
                 studentArrayList = (ArrayList<Student>) ois.readObject();
@@ -87,7 +82,7 @@ public class studentWindow extends JFrame implements Serializable {
             model.addRow(new Object[]{studentID, fullName, DoB, gender, address, email, phoneNo, classID, major});
         }
 
-        //Student filter text field
+        //Bộ lọc thông tin sinh viên
         studentFilterLabel.setFont(new Font("Arial", Font.BOLD, 15));
         studentFilterLabel.setBounds(350, 150, 200, 30);
         mainPanel.add(studentFilterLabel);
@@ -99,7 +94,7 @@ public class studentWindow extends JFrame implements Serializable {
         studentFilterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Find the record matches with the correspond text in the text field (not just studentID 'cause I just found out how to do that xDDDDD)
+                //Tìm bất kì thông tin nào khớp với truy vấn đã cho
                 TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(studentTable.getModel());
                 studentTable.setRowSorter(rowSorter);
                 String text = studentFilterTextField.getText();
@@ -113,27 +108,27 @@ public class studentWindow extends JFrame implements Serializable {
         });
         mainPanel.add(studentFilterButton);
 
-        //Modify information function button
+        //Nút thay đổi thông tin sinh viên
         modifyInfoButton.setBounds(1030, 150, 200, 30);
         modifyInfoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!modifyInformationFormFrame.isVisible()) {
-                    modifyInformationFormFrame.setVisible(true); //Show add new student window
+                    modifyInformationFormFrame.setVisible(true); //Hiển thị cửa sổ thay đổi thông tin sinh viên
                     modifyInformation();
                 }
             }
         });
         mainPanel.add(modifyInfoButton);
 
-        //Add new student window
+        //Cửa sổ thêm mới sinh viên
         newStudentFormFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         newStudentFormFrame.setSize(640, 480);
         newStudentFormFrame.setLayout(null);
         newStudentFormFrame.setLocationRelativeTo(null);
         newStudentFormFrame.setResizable(false);
 
-        //Modify student's information
+        //Cửa sổ thay đổi thông tin sinh viên
         modifyInformationFormFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         modifyInformationFormFrame.setSize(640, 480);
         modifyInformationFormFrame.setLayout(null);
@@ -221,8 +216,8 @@ public class studentWindow extends JFrame implements Serializable {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //When no field is null, save information to the data file and show a message "Added successfully"
-                //Update students table by pushing the data from data file again
+                //Khi không có trường trống, lưu thông tin vào file dữ liệu và hiển thị tin nhắn đã thêm thành công.
+                //Cập nhật bảng thông tin sinh viên bằng cách tải lại dữ liệu một lần nữa.
 
                 String fullName = fullNameField.getText();
                 String dob = dobField.getText();
@@ -339,7 +334,7 @@ public class studentWindow extends JFrame implements Serializable {
         findStudentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //If the studentID exists, return all value to the text fields
+                //Nếu mã sinh viên tồn tại, hiển toàn bộ thông tin trong các trường
                 String studentIDQuery = studentIDTextField.getText();
                 for (Student student : studentArrayList) {
                     if (studentIDQuery.equals(student.getStudentID())) {
@@ -352,6 +347,9 @@ public class studentWindow extends JFrame implements Serializable {
                         majorField.setText(student.getMajor());
                         break;
                     }
+                    else {
+                        clearFields(fullNameField, dobField, genderField, addressField, phoneNumberField, classIDField, majorField);
+                    }
                 }
             }
         });
@@ -363,9 +361,10 @@ public class studentWindow extends JFrame implements Serializable {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //When no field is null, save information to the data file and show a message "Added successfully"
-                //Update students table by pushing the data from data file again
+                //Khi không có trường trống, lưu thng tin vào file dữ liệu và hiển thị tin nhắn đã thay đổi thành công.
+                //Cập nhật bảng thông tin sinh viên bằng cách tải lại dữ liệu một lần nữa.
 
+                String studentID = studentIDTextField.getText();
                 String fullName = fullNameField.getText();
                 String dob = dobField.getText();
                 String gender = genderField.getText();
@@ -385,13 +384,14 @@ public class studentWindow extends JFrame implements Serializable {
                             break;
                         }
                     }
-                    Student newStudent = new Student(fullName, dob, gender, address, phoneNumber, classID, major);
+                    Student newStudent = new Student(studentID, fullName, dob, gender, address, phoneNumber, classID, major);
                     studentArrayList.add(newStudent);
                     saveDataFromList(studentArrayList);
                     DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
                     model.setRowCount(0);
                     loadDataToList(studentTable, studentArrayList);
-                    JOptionPane.showMessageDialog(null, "Added successfully.");
+                    JOptionPane.showMessageDialog(null, "Modified successfully.");
+                    studentIDTextField.setText("");
                     clearFields(fullNameField, dobField, genderField, addressField, phoneNumberField, classIDField, majorField);
                 }
             }
@@ -399,6 +399,7 @@ public class studentWindow extends JFrame implements Serializable {
         formPanel.add(submitButton);
     }
 
+    //Hàm này dùng để lưu dữ liệu vào file từ mảng studentArrayList
     public void saveDataFromList(ArrayList<Student> studentArrayList) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(studentFile))){
             oos.writeObject(studentArrayList);
@@ -407,6 +408,7 @@ public class studentWindow extends JFrame implements Serializable {
         }
     }
 
+    //Hàm này dùng để tải dữ liệu từ file vào mảng studentArrayList
     public void loadDataToList(JTable studentTable, ArrayList<Student> studentArrayList) {
         if (studentFile.exists()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(studentFile))){
@@ -430,6 +432,7 @@ public class studentWindow extends JFrame implements Serializable {
         }
     }
 
+    //Hàm này dùng để xóa trống các trường
     public void clearFields(JTextField fullNameField, JTextField dobField, JTextField genderField, JTextField addressField, JTextField phoneNumberField, JTextField classIDField, JTextField majorField) {
         fullNameField.setText(null);
         dobField.setText(null);
