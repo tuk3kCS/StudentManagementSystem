@@ -2,6 +2,8 @@ package stu_mng_sys;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -9,14 +11,14 @@ public class classesWindow extends JFrame {
     private final JLabel classesLabel = new JLabel("Classes Management");
     private final JButton addClassButton = new JButton("Add New Class");
     private final JButton viewClassesListButton = new JButton("View Classes List");
-    String[][] classInit = {};
-    String[] classAttributes = {"Student ID", "Full Name", "Class ID", "Date of Birth", "Email"};
-    private final JTable classTable = new JTable(classInit, classAttributes);
+    private final JTable classTable = new JTable(new DefaultTableModel(new Object[][]{}, new Object[]{"Student ID", "Full Name", "Date of Birth", "Email", "Phone Number"}));
     private final JLabel classFilterLabel = new JLabel("Search for Class ID");
     private final JTextField classFilterTextField = new JTextField();
     private final JButton classFilterButton = new JButton("Search");
     private final JFrame newClassFormFrame = new JFrame("Add New Class");
     private final JFrame viewClassesListFormFrame = new JFrame("Classes List");
+    public ArrayList<Classes> classesArrayList = new ArrayList<>();
+    private File classesFile = new File("classes.in");
     private final Stu_Mng_Sys mainApp;
 
     public classesWindow(Stu_Mng_Sys mainApp) {
@@ -42,16 +44,25 @@ public class classesWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!newClassFormFrame.isVisible()) {
                     newClassFormFrame.setVisible(true); //Show add new class window
-                    newClassForm();
+                    addNewClass();
                 }
             }
         });
         add(addClassButton);
 
-        //Classes' students table, import from data file
+        //Classes' students table
         JScrollPane studentScrollPane = new JScrollPane(classTable); //Create classes' students table
         add(studentScrollPane);
         studentScrollPane.setBounds(40, 200, 1200, 420);
+
+        //Load all data to the list when active
+        if (classesFile.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(classesFile))){
+                classesArrayList = (ArrayList<Classes>) ois.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 
         //Class filter
         classFilterLabel.setFont(new Font("Arial", Font.BOLD, 15));
@@ -66,7 +77,22 @@ public class classesWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Find all records match with the correspond class ID
-
+                DefaultTableModel model = (DefaultTableModel) classTable.getModel();
+                model.setRowCount(0);
+                String text = classFilterTextField.getText();
+                for (Classes classes : classesArrayList) {
+                    if (text.equals(classes.getClassID())) {
+                        for (Student student : classes.getStudentList()) {
+                            String studentID = student.getStudentID();
+                            String fullName = student.getFullName();
+                            String DoB = student.getDoB();
+                            String email = student.getEmail();
+                            String phoneNo = student.getPhoneNo();
+                            model.addRow(new Object[]{studentID, fullName, DoB, email, phoneNo});
+                        }
+                        break;
+                    }
+                }
             }
         });
         add(classFilterButton);
@@ -78,7 +104,7 @@ public class classesWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!viewClassesListFormFrame.isVisible()) {
                     viewClassesListFormFrame.setVisible(true); //Show add new subject window
-                    viewClassesListForm();
+                    viewClassesList();
                 }
             }
         });
@@ -99,7 +125,7 @@ public class classesWindow extends JFrame {
         viewClassesListFormFrame.setResizable(false);
     }
 
-    public void newClassForm() {
+    public void addNewClass() {
         JPanel formPanel = new JPanel();
         formPanel.setLayout(null);
         formPanel.setSize(640, 480);
@@ -137,12 +163,23 @@ public class classesWindow extends JFrame {
                 //When no field is null, save information to the data file and show a message "Added successfully"
                 //All students with their correspond class ID match with new class's ID will be automatically added into that class
 
+                String classID = classIDField.getText();
+                String major = majorField.getText();
+
+                if (classID.isEmpty() || major.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please fill all the fields.");
+                }
+
+                else {
+                    ArrayList<Student> studentList = new ArrayList<>();
+                    for (Student student : studentArrayList)
+                }
             }
         });
         formPanel.add(submitButton);
     }
 
-    public void viewClassesListForm() {
+    public void viewClassesList() {
         JPanel formPanel = new JPanel();
         formPanel.setLayout(null);
         formPanel.setSize(640, 480);
