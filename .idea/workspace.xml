@@ -8,12 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f5665f1-b943-44eb-864c-f6a3a29b1ead" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/student.in" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/Classes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/Classes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/Stu_Mng_Sys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/Stu_Mng_Sys.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/Subject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/Subject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/studentWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/studentWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +44,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.Stu_Mng_Sys.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "tuk3kCS",
     "ignore.virus.scanning.warn.message": "true",
@@ -69,8 +67,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.19416.15" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.19416.15" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
       </set>
     </attachedChunks>
   </component>
@@ -100,6 +98,7 @@
       <workItem from="1732688957255" duration="36000" />
       <workItem from="1732696316575" duration="1988000" />
       <workItem from="1732717018629" duration="412000" />
+      <workItem from="1733106779564" duration="2996000" />
     </task>
     <servers />
   </component>
@@ -122,6 +121,10 @@
           <line>56</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.io.NotSerializableException" package="java.io" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
