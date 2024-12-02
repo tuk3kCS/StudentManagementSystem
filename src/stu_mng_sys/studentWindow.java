@@ -8,6 +8,9 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 public class studentWindow extends JFrame implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private final JLabel studentLabel = new JLabel("Student Management");
     private final JButton addStudentButton = new JButton("Add New Student");
     private final JButton modifyInfoButton = new JButton("Modify Information");
@@ -60,10 +63,6 @@ public class studentWindow extends JFrame implements Serializable {
         JScrollPane studentScrollPane = new JScrollPane(studentTable); //Create students' information table
         mainPanel.add(studentScrollPane);
         studentScrollPane.setBounds(40, 200, 1200, 420);
-
-        //Test data
-        //studentArrayList.add(new Student("Dinh Quyet Thang", "06/09/2004", "Nam", "Hạ Long, Quảng Ninh", "0123456789", "E22CQCN03-B", "Công nghệ thông tin - CLC"));
-        //studentArrayList.add(new Student("Nguyen Hoang Tung", "03/08/2004", "Nam", "Thanh Xuân, Hà Nội", "0983830780", "E22CQCN03-B", "Công nghệ thông tin - CLC"));
 
         //Load all data to the table when active
         if (studentFile.exists()) {
@@ -352,6 +351,9 @@ public class studentWindow extends JFrame implements Serializable {
                         majorField.setText(student.getMajor());
                         break;
                     }
+                    else {
+                        clearFields(fullNameField, dobField, genderField, addressField, phoneNumberField, classIDField, majorField);
+                    }
                 }
             }
         });
@@ -366,6 +368,7 @@ public class studentWindow extends JFrame implements Serializable {
                 //When no field is null, save information to the data file and show a message "Added successfully"
                 //Update students table by pushing the data from data file again
 
+                String studentID = studentIDTextField.getText();
                 String fullName = fullNameField.getText();
                 String dob = dobField.getText();
                 String gender = genderField.getText();
@@ -385,13 +388,14 @@ public class studentWindow extends JFrame implements Serializable {
                             break;
                         }
                     }
-                    Student newStudent = new Student(fullName, dob, gender, address, phoneNumber, classID, major);
+                    Student newStudent = new Student(studentID, fullName, dob, gender, address, phoneNumber, classID, major);
                     studentArrayList.add(newStudent);
                     saveDataFromList(studentArrayList);
                     DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
                     model.setRowCount(0);
                     loadDataToList(studentTable, studentArrayList);
-                    JOptionPane.showMessageDialog(null, "Added successfully.");
+                    JOptionPane.showMessageDialog(null, "Modified successfully.");
+                    studentIDTextField.setText("");
                     clearFields(fullNameField, dobField, genderField, addressField, phoneNumberField, classIDField, majorField);
                 }
             }
