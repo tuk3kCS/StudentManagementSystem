@@ -13,6 +13,16 @@ class Scores implements Serializable {
         this.subject = subject;
     }
 
+    Scores(Student student, Subject subject, float attendanceScore, float processScore, float midtermScore, float finalScore) {
+        this.student = student;
+        this.subject = subject;
+        setAttendanceScore(attendanceScore);
+        setProcessScore(processScore);
+        setMidtermScore(midtermScore);
+        setFinalScore(finalScore);
+        this.GPA = attendanceScore * 10 / 100 + processScore * 10 / 100 + midtermScore * 20 / 100 + finalScore * 60 / 100;
+    }
+
     public float getAttendanceScore() {
         return attendanceScore;
     }
