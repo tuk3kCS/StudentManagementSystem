@@ -48,7 +48,7 @@ public class scoresWindow extends JFrame {
         add(modifyScoresButton);
 
         //Bảng hiển thị các môn sinh viên đang theo học
-        JScrollPane studentScrollPane = new JScrollPane(scoresTable); //Create students' subjects table
+        JScrollPane studentScrollPane = new JScrollPane(scoresTable);
         add(studentScrollPane);
         studentScrollPane.setBounds(40, 200, 1200, 420);
 
@@ -201,7 +201,7 @@ public class scoresWindow extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Khi không có trường trống, lưu thng tin vào file dữ liệu và hiển thị tin nhắn đã thay đổi thành công.
+                //Khi không có trường trống, lưu thông tin vào file dữ liệu và hiển thị tin nhắn đã thay đổi thành công.
 
                 String studentIDQuery = studentIDField.getText();
                 String subjectIDQuery = subjectIDField.getText();

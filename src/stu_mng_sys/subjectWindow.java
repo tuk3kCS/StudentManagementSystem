@@ -258,7 +258,7 @@ public class subjectWindow extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Khi không có trường trống, lưu thng tin vào file dữ liệu và hiển thị tin nhắn đã thêm thành công.
+                //Khi không có trường trống, lưu thông tin vào file dữ liệu và hiển thị tin nhắn đã thêm thành công.
 
                 String subjectID = subjectIDField.getText().toUpperCase();
                 String subjectName = subjectNameField.getText();
