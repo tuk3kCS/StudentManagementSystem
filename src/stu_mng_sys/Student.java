@@ -32,10 +32,6 @@ class Student implements Serializable {
         this.major = major;
     }
 
-    public Student() {
-
-    }
-
     private static String nameNormalize(String fullName) {
         String[] words = fullName.trim().split("\\s+");
         StringBuilder sb = new StringBuilder();
