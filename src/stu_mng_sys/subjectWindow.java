@@ -20,6 +20,7 @@ public class subjectWindow extends JFrame {
     private ArrayList<Subject> subjectArrayList = new ArrayList<>();
     private File subjectFile = new File("subject.in");
     private File scoresFile = new File("scores.in");
+    private File studentFile = new File("student.in");
     private final Stu_Mng_Sys mainApp;
 
     public subjectWindow(Stu_Mng_Sys mainApp) {
@@ -82,10 +83,10 @@ public class subjectWindow extends JFrame {
                 String text = subjectFilterTextField.getText();
                 for (Subject subject : subjectArrayList) {
                     if (text.equals(subject.getSubjectID())) {
-                        for (Student student : subject.getStudentList()) {
-                            String studentID = student.getStudentID();
-                            String fullName = student.getFullName();
-                            String classID = student.getClassID();
+                        for (int i = 1; i < subject.studentList.size(); i++) {
+                            String studentID = subject.studentList.get(i).getStudentID();
+                            String fullName = subject.studentList.get(i).getFullName();
+                            String classID = subject.studentList.get(i).getClassID();
                             model.addRow(new Object[]{studentID, fullName, classID, subject.getSubjectID(), subject.getSubjectName()});
                         }
                         break;
@@ -161,16 +162,71 @@ public class subjectWindow extends JFrame {
                 //Khi không có trường trống, lưu thông tin vào file dữ liệu và hiển thị tin nhắn đã thêm/xóa đăng ký thành công.
                 //Nếu dữ liệu đã tồn tại, xóa đăng ký môn học. Ngược lại, thêm đăng ký môn học.
 
-                String studentID = studentIDField.getText();
-                String subjectID = subjectIDField.getText();
+                String studentIDQuery = studentIDField.getText();
+                String subjectIDQuery = subjectIDField.getText();
 
-                if (subjectID.isEmpty() || studentID.isEmpty()) {
+                if (subjectIDQuery.isEmpty() || studentIDQuery.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please fill all the fields.");
+                }
+
+                //Tải toàn bộ dữ liệu sinh viên vào một mảng tạm studentArrayList
+                ArrayList<Student> studentArrayList = new ArrayList<>();
+                if (studentFile.exists()) {
+                    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(studentFile))){
+                        studentArrayList = (ArrayList<Student>) ois.readObject();
+                    } catch (IOException | ClassNotFoundException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+                //Tải toàn bộ dữ liệu điểm vào một mảng tạm scoresArrayList
+                ArrayList<Scores> scoresArrayList = new ArrayList<>();
+                if (scoresFile.exists()) {
+                    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(scoresFile))){
+                        scoresArrayList = (ArrayList<Scores>) ois.readObject();
+                    } catch (IOException | ClassNotFoundException ex) {
+                        ex.printStackTrace();
+                    }
                 }
 
                 //Đoạn code sau đây kiểm tra dữ liệu có tồn tại không và thêm/xóa bộ điểm môn học
 
+                for (Subject subject : subjectArrayList) {
+                    if (subject.getSubjectID().equals(subjectIDQuery)) {
+                        int cancelled = 0;
+                        for (Student studentInSubjectList : subject.studentList) {
+                            if (studentInSubjectList.getStudentID().equals(studentIDQuery)) {
+                                cancelled = 1;
+                                subject.studentList.remove(studentInSubjectList);
+                                for (Scores scores: scoresArrayList) {
+                                    if (scores.getStudent().getStudentID().equals(studentIDQuery) && scores.getSubject().getSubjectID().equals(subjectIDQuery)) {
+                                        scoresArrayList.remove(scores);
+                                        JOptionPane.showMessageDialog(null, "Cancelled sucessfully.");
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        if (cancelled == 0) {
+                            for (Student student : studentArrayList) {
+                                if (student.getStudentID().equals(studentIDQuery)) {
+                                    subject.studentList.add(student);
+                                    scoresArrayList.add(new Scores(student, subject));
+                                    JOptionPane.showMessageDialog(null, "Registered sucessfully.");
+                                }
+                            }
+                        }
+                    }
+                }
+
                 //Kết thúc đoạn code
+
+                try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(scoresFile))){
+                    oos.writeObject(scoresArrayList);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
 
                 saveDataFromList(subjectArrayList);
                 studentIDField.setText("");
@@ -226,6 +282,8 @@ public class subjectWindow extends JFrame {
 
                 else {
                     ArrayList<Student> studentArrayList = new ArrayList<>();
+                    Student fakeStudent = new Student("B22DCCN0000","John Smith", "01/01/1970", "", "", "", "", "");
+                    studentArrayList.add(fakeStudent);
                     Subject newSubject = new Subject(subjectID, subjectName, studentArrayList);
                     subjectArrayList.add(newSubject);
                     saveDataFromList(subjectArrayList);
@@ -244,33 +302,6 @@ public class subjectWindow extends JFrame {
             oos.writeObject(subjectArrayList);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    //Hàm này dùng để thêm mới sinh viên vào danh sách sinh viên đang theo học môn học, đồng thời tạo bảng điểm của môn cho sinh viên.
-    public void addStudentToSubjectList(String studentID, ArrayList<Student> studentArrayList, Subject subject) {
-        for (Student student : studentArrayList) {
-            if (student.getStudentID().equals(studentID)) {
-                subject.studentList.add(student);
-
-                ArrayList<Scores> scoresArrayList = new ArrayList<>();
-                if (scoresFile.exists()) {
-                    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(scoresFile))){
-                        scoresArrayList = (ArrayList<Scores>) ois.readObject();
-                    } catch (IOException | ClassNotFoundException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-                scoresArrayList.add(new Scores(student, subject));
-                try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(scoresFile))){
-                    oos.writeObject(scoresArrayList);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                JOptionPane.showMessageDialog(null, "Registered successfully.");
-                break;
-            }
         }
     }
 }
