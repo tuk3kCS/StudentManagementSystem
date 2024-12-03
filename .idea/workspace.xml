@@ -9,13 +9,11 @@
   <component name="ChangeListManager">
     <list default="true" id="8f5665f1-b943-44eb-864c-f6a3a29b1ead" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/classes.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scores.in" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/student.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/subject.in" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/Stu_Mng_Sys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/Stu_Mng_Sys.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/classesWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/classesWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/scoresWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/scoresWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/studentWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/studentWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stu_mng_sys/subjectWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/stu_mng_sys/subjectWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +113,8 @@
       <workItem from="1733148918946" duration="20000" />
       <workItem from="1733152347867" duration="6160000" />
       <workItem from="1733158688690" duration="189000" />
-      <workItem from="1733204896276" duration="1785000" />
+      <workItem from="1733204896276" duration="9234000" />
+      <workItem from="1733219377864" duration="1953000" />
     </task>
     <servers />
   </component>
