@@ -168,52 +168,9 @@ public class subjectWindow extends JFrame {
                     JOptionPane.showMessageDialog(null, "Please fill all the fields.");
                 }
 
-                ArrayList<Student> studentArrayList = new ArrayList<>();
-                try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("student.in"))){
-                    studentArrayList = (ArrayList<Student>) ois.readObject();
-                } catch (IOException | ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                }
-                for (Subject subject : subjectArrayList) {
-                    if (subject.getSubjectID().equals(subjectID) && !subject.studentList.isEmpty()) {
-                        int cancelled = 0;
-                        for (Student studentInList : subject.studentList) {
-                            if (studentInList.getStudentID().equals(studentID)) {
-                                subject.studentList.remove(studentInList);
-                                cancelled = 1;
+                //Đoạn code sau đây kiểm tra dữ liệu có tồn tại không và thêm/xóa bộ điểm môn học
 
-                                ArrayList<Scores> scoresArrayList = new ArrayList<>();
-                                if (scoresFile.exists()) {
-                                    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("scores.in"))){
-                                        scoresArrayList = (ArrayList<Scores>) ois.readObject();
-                                    } catch (IOException | ClassNotFoundException ex) {
-                                        ex.printStackTrace();
-                                    }
-                                }
-                                for (Scores scores : scoresArrayList) {
-                                    if (scores.getStudent().getStudentID().equals(studentID) && scores.getSubject().getSubjectID().equals(subjectID)) {
-                                        scoresArrayList.remove(scores);
-                                        break;
-                                    }
-                                }
-                                try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("scores.in"))){
-                                    oos.writeObject(scoresArrayList);
-                                } catch (IOException ex) {
-                                    ex.printStackTrace();
-                                }
-
-                                JOptionPane.showMessageDialog(null, "Cancelled successfully.");
-                                break;
-                            }
-                        }
-                        if (cancelled == 0) {
-                            addStudentToSubjectList(studentID, studentArrayList, subject);
-                        }
-                    }
-                    else {
-                        addStudentToSubjectList(studentID, studentArrayList, subject);
-                    }
-                }
+                //Kết thúc đoạn code
 
                 saveDataFromList(subjectArrayList);
                 studentIDField.setText("");

@@ -74,6 +74,13 @@ public class scoresWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Tìm tất cả các bản ghi (danh sách môn học sinh viên này đang theo học) khớp với mã môn học đã cho
+                if (scoresFile.exists()) {
+                    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(scoresFile))){
+                        scoresArrayList = (ArrayList<Scores>) ois.readObject();
+                    } catch (IOException | ClassNotFoundException ex) {
+                        ex.printStackTrace();
+                    }
+                }
                 DefaultTableModel model = (DefaultTableModel) scoresTable.getModel();
                 model.setRowCount(0);
                 String text = studentFilterTextField.getText();
