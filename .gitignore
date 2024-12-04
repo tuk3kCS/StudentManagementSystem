@@ -27,3 +27,10 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+.idea/workspace.xml
+classes.in
+scores.in
+student.in
+subject.in
+.idea/workspace.xml
+.idea/workspace.xml
