@@ -11,4 +11,4 @@ Sản phẩm đồ án BTL của nhóm sinh viên môn Lập trình hướng đ�
 
 # Cài đặt và khởi chạy #
 
-Không cần cài đặt và có thể khởi chạy và sử dụng trực tiếp dễ dàng tệp .jar trong phiên bản mới nhất từ trang [Releases](https://github.com/tuk3kCS/StudentManagementSystem/releases)
+Không cần cài đặt, có thể khởi chạy và sử dụng trực tiếp dễ dàng tệp .jar trong phiên bản mới nhất từ trang [Releases](https://github.com/tuk3kCS/StudentManagementSystem/releases)
