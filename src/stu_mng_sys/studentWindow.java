@@ -232,14 +232,25 @@ public class studentWindow extends JFrame {
                 }
 
                 else {
-                    Student newStudent = new Student(fullName, dob, gender, address, phoneNumber, classID, major);
-                    studentArrayList.add(newStudent);
-                    saveDataFromList(studentArrayList);
-                    DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
-                    model.setRowCount(0);
-                    loadDataToList(studentTable, studentArrayList);
-                    JOptionPane.showMessageDialog(null, "Added successfully.");
-                    clearFields(fullNameField, dobField, genderField, addressField, phoneNumberField, classIDField, majorField);
+                    int added = 0;
+                    for (Student student: studentArrayList) {
+                        if (student.getFullName().equals(fullName) && student.getAddress().equals(address)) {
+                            added = 1;
+                            JOptionPane.showMessageDialog(null, "This student has already been added.");
+                            clearFields(fullNameField, dobField, genderField, addressField, phoneNumberField, classIDField, majorField);
+                            break;
+                        }
+                    }
+                    if (added == 0) {
+                        Student newStudent = new Student(fullName, dob, gender, address, phoneNumber, classID, major);
+                        studentArrayList.add(newStudent);
+                        saveDataFromList(studentArrayList);
+                        DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
+                        model.setRowCount(0);
+                        loadDataToList(studentTable, studentArrayList);
+                        JOptionPane.showMessageDialog(null, "Added successfully.");
+                        clearFields(fullNameField, dobField, genderField, addressField, phoneNumberField, classIDField, majorField);
+                    }
                 }
             }
         });
